@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
     private Player player;
@@ -12,7 +12,10 @@ public class SceneLoader : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
+        // Creating the only player instance of the game
         player = new Player();
+        Player.stats.repeater = true;
+        Player.stats.drawBackDelay = 0.2f;
     }
 
     private void Awake()
@@ -20,7 +23,7 @@ public class SceneLoader : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
-        playerInputActions.Player.Action.performed += LoadScene;
+        playerInputActions.Player.Reset.performed += LoadScene;
     }
 
     private void LoadScene(InputAction.CallbackContext context)

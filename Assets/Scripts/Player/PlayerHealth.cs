@@ -8,12 +8,4 @@ public class PlayerHealth : Health
     {
         Time.timeScale = 0;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(1);
-        }
-    }
 }

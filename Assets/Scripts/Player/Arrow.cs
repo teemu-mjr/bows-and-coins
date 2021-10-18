@@ -38,6 +38,10 @@ public class Arrow : MonoBehaviour
         if (!other.CompareTag("Player") && !other.CompareTag("PlayerArrow"))
         {
             Destroy(gameObject);
+            if (other.CompareTag("EnemyArrow"))
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 }

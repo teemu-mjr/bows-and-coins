@@ -30,10 +30,7 @@ public class PlayerMovement : MonoBehaviour
         if (movementVector != Vector2.zero)
         {
             MoveCharacter();
-            if (!Bow.isShooting)
-            {
-                HandlePlayerRotation();
-            }
+            HandlePlayerRotation();
         }
         SlowDownCharacter();
     }
@@ -56,13 +53,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandlePlayerRotation()
     {
-        RotatePlayerWithInputVector(movementVector);
-
+        if (!Bow.isShooting)
+        {
+            RotatePlayerWithInputVector(movementVector);
+        }
     }
 
     private void RotatePlayerWithInputVector(Vector2 rotatingVector)
     {
         var angle = Mathf.Atan2(rotatingVector.x, rotatingVector.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
+        transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.rotation.eulerAngles), Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z), Time.deltaTime * 10);
     }
 }

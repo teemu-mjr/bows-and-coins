@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hugger : MonoBehaviour
+public class Hugger : Enemy
 {
-    public float startupFreeze = 1f;
-    public float minSpeed = 1f;
-    public float maxSpeed = 5f;
-    public float damage = 0.5f;
-    public float knockBackForce = 10;
-    public float speed;
-
-    private GameObject target;
-    private float timeAlive;
+    private float minSpeed = 1f;
+    private float maxSpeed = 5f;
+    private float speed;
 
     void Start()
     {
@@ -20,13 +14,17 @@ public class Hugger : MonoBehaviour
         speed = Random.Range(minSpeed, maxSpeed);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (timeAlive > startupFreeze)
+        if (!isFrozen)
         {
             FollowPlayer();
         }
-        else
+        else if (timeAlive > startupFreeze && isFrozen)
+        {
+            isFrozen = false;
+        }
+        else if (isFrozen)
         {
             timeAlive += Time.deltaTime;
         }
@@ -38,14 +36,6 @@ public class Hugger : MonoBehaviour
         {
             Vector3 movementDirection = target.transform.position - transform.position;
             transform.Translate(movementDirection.normalized * speed * Time.deltaTime);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * knockBackForce, ForceMode.Impulse);
         }
     }
 }

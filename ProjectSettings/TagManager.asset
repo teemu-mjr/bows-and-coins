@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Coin
   - PlayerArrow
+  - TriggerZ
+  - TriggerX
+  - EnemyArrow
   layers:
   - Default
   - TransparentFX

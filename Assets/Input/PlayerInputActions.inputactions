@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "b7b83c20-14fe-4140-8b29-d50efb2deca3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -210,7 +218,7 @@
                 {
                     "name": "up",
                     "id": "9dc97aa1-63e5-4226-b64d-20200b3015c8",
-                    "path": "<Gamepad>/rightStick/down",
+                    "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -221,7 +229,7 @@
                 {
                     "name": "down",
                     "id": "e26eafef-7723-46b7-83f8-f7df7a0b9882",
-                    "path": "<Gamepad>/rightStick/up",
+                    "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -232,7 +240,7 @@
                 {
                     "name": "left",
                     "id": "e2f72ac4-c096-426a-9360-527c40f9e41a",
-                    "path": "<Gamepad>/rightStick/right",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -243,7 +251,7 @@
                 {
                     "name": "right",
                     "id": "9aec968b-261e-4d70-a9e6-c7c9fe339ae1",
-                    "path": "<Gamepad>/rightStick/left",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -270,6 +278,66 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4cc6dc9-b8f2-4e9e-808f-ad4b3735b42e",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5555b367-0556-4168-aa41-4a83d17feb7b",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "7c97aa57-2f85-4fe3-8e12-67234c397177",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "2a4e2aaa-bc3a-4fb4-b4c2-65f5d145a957",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f422d611-7f45-470b-a0a4-afe3e61a20cf",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ddf1943-c85a-44fd-9b52-c7ed685bcd1b",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

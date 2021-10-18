@@ -2,38 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bouncer : MonoBehaviour
+public class Bouncer : Enemy
 {
-    public float startupFreeze = 1f;
-    public float minSpeed = 1f;
-    public float maxSpeed = 5f;
-    public float damage = 0.5f;
-    public float knockBackForce = 10;
-    public float speedX = 10;
-    public float speedY = 10;
-    public float shotInterval = 1;
     public GameObject arrow;
+    public float arrowSpeed;
     public Transform firePoint;
 
-    private GameObject target;
-    private float timeAlive;
+    private float maxSpeed = 5;
+    private float minArrowSpeed = 5;
+    private float maxArrowSpeed = 20;
+    private float speedX = 10;
+    private float speedY = 10;
+    private float shotInterval = 1;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
         speedX = Random.Range(-maxSpeed, maxSpeed);
         speedY = Random.Range(-maxSpeed, maxSpeed);
+        arrowSpeed = Random.Range(minArrowSpeed, maxArrowSpeed);
+        arrow.GetComponent<EnemyArrow>().speed = arrowSpeed;
         InvokeRepeating("ShootArrow", Random.Range(0.5f, 2f), shotInterval);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (timeAlive > startupFreeze)
+        if (!isFrozen)
         {
             Move();
         }
-        else
+        else if (timeAlive > startupFreeze && isFrozen)
+        {
+            isFrozen = false;
+        }
+        else if (isFrozen)
         {
             timeAlive += Time.deltaTime;
         }
@@ -54,11 +57,11 @@ public class Bouncer : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "ColliderY")
+        if (collider.tag == "TriggerZ")
         {
             speedY *= -1;
         }
-        if (collider.tag == "ColliderX")
+        if (collider.tag == "TriggerX")
         {
             speedX *= -1;
         }
@@ -66,10 +69,10 @@ public class Bouncer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !isFrozen)
         {
-            collision.gameObject.GetComponent<Health>().TakeDamage(damage);
-            collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * 250, ForceMode.Impulse);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * knockBackForce, ForceMode.Impulse);
             if (Random.Range(0, 2) == 0)
             {
                 speedX *= -1;

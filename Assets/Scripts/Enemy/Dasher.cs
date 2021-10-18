@@ -2,24 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dasher : MonoBehaviour
+public class Dasher : Enemy
 {
-    public float startupFreeze = 1f;
-    public float minSpeed = 1f;
-    public float maxSpeed = 5f;
-    public float damage = 0.5f;
-    public float knockBackForce = 10;
-    public float speed = 10;
-    public float minDashDelay = 1;
-    public float maxDashDelay = 3;
-    public float minDashInterval = 1;
-    public float maxDashInterval = 3;
+    private float minDashDelay = 0.5f;
+    private float maxDashDelay = 2;
+    private float minDashInterval = 1;
+    private float maxDashInterval = 3;
+    private float minSpeed = 5;
+    private float maxSpeed = 30;
 
-    private GameObject target;
     private Rigidbody rb;
     private Vector3 playerDirection;
     private float dashDelay;
     private float dashInterval;
+    private float speed;
 
     void Start()
     {
@@ -30,6 +26,7 @@ public class Dasher : MonoBehaviour
 
         InvokeRepeating("StartDash", Random.Range(0.5f, 2f), dashInterval);
     }
+
 
     private void RandomizeStats()
     {
@@ -48,13 +45,5 @@ public class Dasher : MonoBehaviour
     {
         yield return new WaitForSeconds(dashDelay);
         rb.AddForce(playerDirection * speed, ForceMode.Impulse);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * knockBackForce, ForceMode.Impulse);
-        }
     }
 }

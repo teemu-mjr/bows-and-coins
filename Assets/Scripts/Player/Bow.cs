@@ -20,19 +20,16 @@ public class Bow : MonoBehaviour
     private void Update()
     {
         shootingVector = playerInputActions.Player.Shoot.ReadValue<Vector2>();
-        if (shootingVector != Vector2.zero && !isShooting)
-        {
-            isShooting = true;
-        }
+        isShooting = shootingVector != Vector2.zero;
     }
 
     private void FixedUpdate()
     {
-        if (shootingVector != Vector2.zero)
+        if (isShooting)
         {
             HandleShooting();
         }
-        else if (shootingVector == Vector2.zero && heldBackTime != 0)
+        else if (!isShooting && heldBackTime > 0)
         {
             Shoot();
         }
@@ -42,6 +39,10 @@ public class Bow : MonoBehaviour
     {
         heldBackTime += Time.deltaTime;
         RotatePlayerWithInputVector(shootingVector);
+        if (Player.stats.repeater && heldBackTime / Player.stats.drawBackDelay >= 1)
+        {
+            Shoot();
+        }
     }
 
     private void Shoot()
@@ -50,7 +51,6 @@ public class Bow : MonoBehaviour
         {
             Instantiate(arrow, (transform.position + transform.forward * 0.8f), transform.rotation);
         }
-        isShooting = false;
     }
 
     private void RotatePlayerWithInputVector(Vector2 rotatingVector)
