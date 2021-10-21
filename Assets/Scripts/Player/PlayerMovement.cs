@@ -55,13 +55,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!Bow.isShooting)
         {
-            RotatePlayerWithInputVector(movementVector);
+            RotatePlayerWithInputVector();
         }
     }
 
-    private void RotatePlayerWithInputVector(Vector2 rotatingVector)
+    private void RotatePlayerWithInputVector()
     {
-        var angle = Mathf.Atan2(rotatingVector.x, rotatingVector.y) * Mathf.Rad2Deg;
+        var angle = Mathf.Atan2(movementVector.x, movementVector.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.rotation.eulerAngles), Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z), Time.deltaTime * 10);
     }
 }

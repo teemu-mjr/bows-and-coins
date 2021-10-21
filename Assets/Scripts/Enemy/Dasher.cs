@@ -8,19 +8,19 @@ public class Dasher : Enemy
     private float maxDashDelay = 2;
     private float minDashInterval = 1;
     private float maxDashInterval = 3;
-    private float minSpeed = 5;
-    private float maxSpeed = 30;
 
     private Rigidbody rb;
     private Vector3 playerDirection;
     private float dashDelay;
     private float dashInterval;
-    private float speed;
+    private float speed = 5;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
+        speed *= ArenaController.DifficultyMultiplyer;
+        Debug.Log(speed);
 
         RandomizeStats();
 
@@ -30,20 +30,20 @@ public class Dasher : Enemy
 
     private void RandomizeStats()
     {
-        speed = Random.Range(minSpeed, maxSpeed);
         dashDelay = Random.Range(minDashDelay, maxDashDelay);
         dashInterval = Random.Range(minDashInterval, maxDashInterval);
     }
 
     private void StartDash()
     {
-        playerDirection = (target.transform.position - transform.position).normalized;
+        playerDirection = new Vector3(target.transform.position.x, 0, target.transform.position.z) -
+                new Vector3(transform.position.x, 0, transform.position.z);
         StartCoroutine(Dash());
     }
 
     IEnumerator Dash()
     {
         yield return new WaitForSeconds(dashDelay);
-        rb.AddForce(playerDirection * speed, ForceMode.Impulse);
+        rb.AddForce(playerDirection.normalized * speed, ForceMode.Impulse);
     }
 }

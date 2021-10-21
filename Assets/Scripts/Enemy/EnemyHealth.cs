@@ -5,7 +5,13 @@ using UnityEngine;
 public class EnemyHealth : Health
 {
     public GameObject itemToDrop;
-    public int dropAmount = 4;
+    private int dropAmount = 3;
+
+    private void Start()
+    {
+        dropAmount = Mathf.RoundToInt(dropAmount * ArenaController.DifficultyMultiplyer);
+    }
+
     public override void Die()
     {
         DropItem();

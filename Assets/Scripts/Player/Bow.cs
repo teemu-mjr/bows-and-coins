@@ -21,10 +21,6 @@ public class Bow : MonoBehaviour
     {
         shootingVector = playerInputActions.Player.Shoot.ReadValue<Vector2>();
         isShooting = shootingVector != Vector2.zero;
-    }
-
-    private void FixedUpdate()
-    {
         if (isShooting)
         {
             HandleShooting();
@@ -33,6 +29,10 @@ public class Bow : MonoBehaviour
         {
             Shoot();
         }
+    }
+
+    private void FixedUpdate()
+    {
     }
 
     private void HandleShooting()

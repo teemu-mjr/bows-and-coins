@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
         // Creating the only player instance of the game
         player = new Player();
-        Player.stats.repeater = true;
-        Player.stats.drawBackDelay = 0.2f;
     }
 
     private void Awake()

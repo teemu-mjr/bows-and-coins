@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArenaController : MonoBehaviour
 {
+    private static float difficultyMultiplyer;
     public List<GameObject> enemies;
     public Vector2 spawnArea;
 
@@ -13,6 +14,14 @@ public class ArenaController : MonoBehaviour
     private int waveNumber;
 
     PlayerInputActions playerInputActions;
+
+    public static float DifficultyMultiplyer
+    {
+        get
+        {
+            return difficultyMultiplyer;
+        }
+    }
     void Start()
     {
         playerInputActions = new PlayerInputActions();
@@ -20,6 +29,7 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Action.performed += Action_performed;
 
         waveNumber = 0;
+        difficultyMultiplyer = 1;
     }
 
     private void Action_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -42,7 +52,8 @@ public class ArenaController : MonoBehaviour
     private void HandleNextWave()
     {
         waveNumber++;
-        SpawnEnemies(waveNumber);
+        difficultyMultiplyer += 0.125f;
+        SpawnEnemies(Mathf.RoundToInt(1 + difficultyMultiplyer));
     }
 
     private void SpawnEnemies(int amount)

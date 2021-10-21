@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float knockBackForce = 10;
     public float timeAlive = 0;
 
+
     private void FixedUpdate()
     {
         if (timeAlive > startupFreeze && isFrozen)
