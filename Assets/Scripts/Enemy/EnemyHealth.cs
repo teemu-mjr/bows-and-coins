@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : Health
 {
     public GameObject itemToDrop;
+
     private int dropAmount = 3;
 
     private void Start()
@@ -17,6 +18,11 @@ public class EnemyHealth : Health
         DropItem();
         Destroy(gameObject);
     }
+    public override void ShowDamage(float damage)
+    {
+        dmgPopUp.Init();
+        dmgPopUp.PopUp(10);
+    }
 
     private void DropItem()
     {
@@ -25,6 +31,7 @@ public class EnemyHealth : Health
             Instantiate(itemToDrop, transform.position, transform.rotation);
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

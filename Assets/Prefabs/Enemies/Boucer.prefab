@@ -133,11 +133,6 @@ MonoBehaviour:
   damage: 0.5
   knockBackForce: 10
   timeAlive: 0
-  minSpeed: 1
-  maxSpeed: 5
-  speedX: 10
-  speedY: 10
-  shotInterval: 1
   arrow: {fileID: 6754017770230305004, guid: 067f2db428b681242baf46ed4f0aab20, type: 3}
   firePoint: {fileID: 1016718716752806681}
 --- !u!114 &1657755328894022860
@@ -153,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  dmgPopUp: {fileID: 5572547285204752698, guid: 76df35a95b975df4f9262d4a1040f492, type: 3}
   itemToDrop: {fileID: 2923249501993582414, guid: 9abf40b40af81cb488c0db96912458bb, type: 3}
-  dropAmount: 4
 --- !u!1 &5444838972699084080
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,15 +64,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 4764250337768439556, guid: 8514a117a545a36469c79563a570cf61, type: 3}
   startupFreeze: 1
-  minSpeed: 1
-  maxSpeed: 5
+  isFrozen: 1
   damage: 0.5
-  speed: 1
+  knockBackForce: 10
   timeAlive: 0
-  minDashDelay: 1
-  maxDashDelay: 2
-  minDashInterval: 1
-  maxDashInterval: 2
 --- !u!114 &7057209437664066595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  dmgPopUp: {fileID: 5572547285204752698, guid: 76df35a95b975df4f9262d4a1040f492, type: 3}
   itemToDrop: {fileID: 2923249501993582414, guid: 9abf40b40af81cb488c0db96912458bb, type: 3}
 --- !u!1 &8846979499678770951
 GameObject:

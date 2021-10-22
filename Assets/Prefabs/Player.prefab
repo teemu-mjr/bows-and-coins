@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  dmgPopUp: {fileID: 5572547285204752698, guid: 76df35a95b975df4f9262d4a1040f492, type: 3}
 --- !u!1 &4764250338455041213
 GameObject:
   m_ObjectHideFlags: 0
