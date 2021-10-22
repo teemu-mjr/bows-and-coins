@@ -18,11 +18,6 @@ public class EnemyHealth : Health
         DropItem();
         Destroy(gameObject);
     }
-    public override void ShowDamage(float damage)
-    {
-        dmgPopUp.Init();
-        dmgPopUp.PopUp(10);
-    }
 
     private void DropItem()
     {

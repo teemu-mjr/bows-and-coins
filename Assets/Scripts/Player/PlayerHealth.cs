@@ -8,9 +8,4 @@ public class PlayerHealth : Health
     {
         Time.timeScale = 0;
     }
-
-    public override void ShowDamage(float damage)
-    {
-        Debug.Log($"Player took: {damage}");
-    }
 }

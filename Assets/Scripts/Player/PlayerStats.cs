@@ -20,7 +20,7 @@ public class PlayerStats
     /// </summary>
     public PlayerStats()
     {
-        movementSpeed = 60;
+        movementSpeed = 600;
         drawBackDelay = 3f;
         repeater = false;
         arrowSpeed = 10;

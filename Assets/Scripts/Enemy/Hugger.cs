@@ -34,7 +34,6 @@ public class Hugger : Enemy
     {
         if (Vector3.Distance(transform.position, target.transform.position) > 0.1f)
         {
-            //Vector3 movementDirection = target.transform.position - transform.position;
             Vector3 movementDirection = new Vector3(target.transform.position.x, 0, target.transform.position.z) - 
                 new Vector3(transform.position.x,0,transform.position.z);
             transform.Translate(movementDirection.normalized * speed * Time.deltaTime);

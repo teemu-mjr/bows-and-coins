@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(RandomVector3(-4, 4), ForceMode.Impulse);
-        rb.rotation = Quaternion.Euler(RandomVector3(-360, 360));
+        rb.AddTorque(RandomVector3(-1000, 10000), ForceMode.Impulse);
     }
 
     private Vector3 RandomVector3(float maxValue, float minValue)
@@ -21,7 +21,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(rb.isKinematic == false && other.CompareTag("Ground"))
+        if (rb.isKinematic == false && other.CompareTag("Ground"))
         {
             rb.isKinematic = true;
         }

@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  dmgPopUp: {fileID: 5572547285204752698, guid: 76df35a95b975df4f9262d4a1040f492, type: 3}
+  damagePrefab: {fileID: 8848409653633643752, guid: 76df35a95b975df4f9262d4a1040f492, type: 3}
+  damagePopUp: {fileID: 0}
   itemToDrop: {fileID: 2923249501993582414, guid: 9abf40b40af81cb488c0db96912458bb, type: 3}
 --- !u!1 &5444838972699084080
 GameObject:

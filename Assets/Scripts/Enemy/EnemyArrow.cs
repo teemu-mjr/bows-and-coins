@@ -16,12 +16,12 @@ public class EnemyArrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponent<Health>().TakeDamage(1);
-        }
         if (!other.CompareTag("EnemyArrow") && !other.CompareTag("Enemy"))
         {
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<Health>().TakeDamage(1);
+            }
             Destroy(gameObject);
         }
     }
