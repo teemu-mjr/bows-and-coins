@@ -5,6 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     private Rigidbody rb;
+    private int amount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class Coin : MonoBehaviour
         }
         if (other.CompareTag("Player"))
         {
-            Player.stats.coins++;
+            other.GetComponent<Inventory>().AddCoin(amount);
             Destroy(gameObject);
         }
     }

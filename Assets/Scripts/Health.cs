@@ -11,7 +11,7 @@ public abstract class Health : MonoBehaviour
     /// If health reaches 0 the object will Die()
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

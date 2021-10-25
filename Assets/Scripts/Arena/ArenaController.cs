@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ArenaController : MonoBehaviour
 {
-    private static float difficultyMultiplyer;
     public List<GameObject> enemies;
     public Vector2 spawnArea;
+    public TextMeshProUGUI waveText;
 
+    private static float difficultyMultiplyer;
     public delegate void NextWave();
     public static event NextWave OnNextWave;
 
@@ -53,6 +55,7 @@ public class ArenaController : MonoBehaviour
     {
         waveNumber++;
         difficultyMultiplyer += 0.125f;
+        waveText.text = $"Wave: {waveNumber.ToString()}";
         SpawnEnemies(Mathf.RoundToInt(1 + difficultyMultiplyer));
     }
 

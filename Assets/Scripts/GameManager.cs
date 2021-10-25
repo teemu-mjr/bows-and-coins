@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
         // Creating the only player instance of the game
         player = new Player();
+        PlayerHealth.PlayerDied += OnPlayerDeath;
     }
 
     private void Awake()
@@ -28,5 +29,17 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
+        Player.stats.coins = 0;
+    }
+
+    private void OnPlayerDeath()
+    {
+        player.SavePlayer();
+    }
+
+    private void OnDestroy()
+    {
+        // Remove subscriptions
+        PlayerHealth.PlayerDied -= OnPlayerDeath;
     }
 }

@@ -1,18 +1,21 @@
 using System;
+using UnityEngine;
 using System.IO;
 using System.Xml.Serialization;
 
 public class SerializeData
 {
-    private static string userFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-    private static string fileLocation = @$"{userFolderPath}\Bows and Coins\";
+    private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
+
+    //private static string userFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    //private static string fileLocation = @$"{userFolderPath}\Bows and Coins\";
 
 
     public SerializeData()
     {
-        if (!Directory.Exists(fileLocation))
+        if (!Directory.Exists(SAVE_FOLDER))
         {
-            Directory.CreateDirectory(fileLocation);
+            Directory.CreateDirectory(SAVE_FOLDER);
         }
     }
 
@@ -20,7 +23,7 @@ public class SerializeData
     {
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
 
-        using(TextWriter writer = new StreamWriter(@$"{fileLocation}\playerStats.dat"))
+        using(TextWriter writer = new StreamWriter(@$"{SAVE_FOLDER}\playerStats.dat"))
         {
             xmlSerializer.Serialize(writer, data);
         }
@@ -30,9 +33,9 @@ public class SerializeData
     public T LoadData<T>()
     {
         XmlSerializer deserializer = new XmlSerializer(typeof(T));
-        if (File.Exists(@$"{fileLocation}\playerStats.dat"))
+        if (File.Exists(@$"{SAVE_FOLDER}\playerStats.dat"))
         {
-            TextReader reader = new StreamReader(@$"{fileLocation}\playerStats.dat");
+            TextReader reader = new StreamReader(@$"{SAVE_FOLDER}\playerStats.dat");
             object obj = deserializer.Deserialize(reader);
             reader.Close();
             return (T)obj;

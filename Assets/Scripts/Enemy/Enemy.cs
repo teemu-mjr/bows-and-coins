@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
             collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * knockBackForce, ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce((transform.position - target.transform.position).normalized * knockBackForce, ForceMode.Impulse);
         }
     }
 }

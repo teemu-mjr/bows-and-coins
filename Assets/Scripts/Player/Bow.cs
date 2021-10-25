@@ -31,9 +31,6 @@ public class Bow : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-    }
 
     private void HandleShooting()
     {

@@ -20,11 +20,11 @@ public class PauseMenu : MonoBehaviour
 
     public void HandlePause(InputAction.CallbackContext context)
     {
-        if (isPaused == false)
+        if (!isPaused)
         {
             Pause();
         }
-        else
+        else if (isPaused && !Shop.isInShop)
         {
             Continue();
         }

@@ -13,7 +13,7 @@ public class Dasher : Enemy
     private Vector3 playerDirection;
     private float dashDelay;
     private float dashInterval;
-    private float speed = 5;
+    private float speed = 75;
 
     void Start()
     {

@@ -21,9 +21,9 @@ public class PlayerStats
     public PlayerStats()
     {
         movementSpeed = 600;
-        drawBackDelay = 3f;
+        drawBackDelay = 0.2f;
         repeater = false;
-        arrowSpeed = 10;
+        arrowSpeed = 8;
         flightTimeMax = 1f;
         arrowDamage = 1;
         coins = 0;
