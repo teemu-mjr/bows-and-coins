@@ -40,6 +40,7 @@ public class Shop : MonoBehaviour
     {
         shopCanvas.SetActive(false);
         isInShop = false;
+        Player.stats.coins = 0;
     }
 
     private void OnDestroy()

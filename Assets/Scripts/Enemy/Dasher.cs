@@ -20,7 +20,6 @@ public class Dasher : Enemy
         target = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
         speed *= ArenaController.DifficultyMultiplyer;
-        Debug.Log(speed);
 
         RandomizeStats();
 
