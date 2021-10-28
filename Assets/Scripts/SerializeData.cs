@@ -23,7 +23,7 @@ public class SerializeData
     {
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
 
-        using(TextWriter writer = new StreamWriter(@$"{SAVE_FOLDER}\playerStats.dat"))
+        using(TextWriter writer = new StreamWriter(@$"{SAVE_FOLDER}\playerStats.json"))
         {
             xmlSerializer.Serialize(writer, data);
         }
@@ -33,9 +33,9 @@ public class SerializeData
     public T LoadData<T>()
     {
         XmlSerializer deserializer = new XmlSerializer(typeof(T));
-        if (File.Exists(@$"{SAVE_FOLDER}\playerStats.dat"))
+        if (File.Exists(@$"{SAVE_FOLDER}\playerStats.json"))
         {
-            TextReader reader = new StreamReader(@$"{SAVE_FOLDER}\playerStats.dat");
+            TextReader reader = new StreamReader(@$"{SAVE_FOLDER}\playerStats.json");
             object obj = deserializer.Deserialize(reader);
             reader.Close();
             return (T)obj;

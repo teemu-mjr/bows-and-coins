@@ -26,6 +26,10 @@ public class Coin : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+        if (other.CompareTag("Wall"))
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Inventory>().AddCoin(amount);

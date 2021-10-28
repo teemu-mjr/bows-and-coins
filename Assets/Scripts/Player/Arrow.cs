@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    [HideInInspector] public float heldBackTime;
+    [HideInInspector] public float heldBackProcentage;
+
     private Rigidbody rb;
     private float fightTime;
     private float flightTimeMax;
-    public float heldBackProcentage;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        heldBackProcentage = Bow.heldBackTime / Player.stats.drawBackDelay;
+        heldBackProcentage = heldBackTime / Player.stats.drawBackDelay;
+
+        // Limit held back procentage to 1 (100%)
         if (heldBackProcentage > 1)
         {
             heldBackProcentage = 1;
         }
+
         rb.velocity = transform.forward * Player.stats.arrowSpeed * heldBackProcentage;
-        Bow.heldBackTime = 0;
 
         flightTimeMax = Player.stats.flightTimeMax * heldBackProcentage;
     }

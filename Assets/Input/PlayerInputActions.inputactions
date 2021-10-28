@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Shoot",
+                    "name": "ShootDirection",
                     "type": "Value",
                     "id": "43728eb2-f2de-4308-b74e-273bcbf93866",
                     "expectedControlType": "Vector2",
@@ -33,6 +33,14 @@
                     "name": "Reset",
                     "type": "Button",
                     "id": "b7b83c20-14fe-4140-8b29-d50efb2deca3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "847d1c8d-229b-4c54-953e-2c5dcb94e2e4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -156,7 +164,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -167,7 +175,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -178,7 +186,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -189,7 +197,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -200,7 +208,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -211,7 +219,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -222,7 +230,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -233,7 +241,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -244,7 +252,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -255,14 +263,14 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Shoot",
+                    "action": "ShootDirection",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
                     "id": "cffef884-1e93-4ad5-a071-9b952bf2e996",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -300,6 +308,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98e10cad-4429-49b5-8136-6e918e160627",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40dc9079-f460-4b4b-ba8c-fcbc2916fd86",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

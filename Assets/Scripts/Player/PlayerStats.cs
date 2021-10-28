@@ -21,7 +21,7 @@ public class PlayerStats
     public PlayerStats()
     {
         movementSpeed = 600;
-        drawBackDelay = 0.2f;
+        drawBackDelay = 3f;
         repeater = false;
         arrowSpeed = 8;
         flightTimeMax = 1f;

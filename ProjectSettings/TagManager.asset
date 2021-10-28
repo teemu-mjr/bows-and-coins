@@ -11,6 +11,7 @@ TagManager:
   - TriggerZ
   - TriggerX
   - EnemyArrow
+  - Wall
   layers:
   - Default
   - TransparentFX
