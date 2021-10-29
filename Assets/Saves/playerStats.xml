@@ -26,5 +26,5 @@
     <cost>0</cost>
   </arrowDamage>
   <repeater>false</repeater>
-  <coins>0</coins>
+  <coins>6</coins>
 </PlayerStats>
