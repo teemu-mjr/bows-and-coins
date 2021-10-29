@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,12 @@ public class Shop : MonoBehaviour
 
     public GameObject shopCanvas;
 
-    private void Start()
+    private void OnEnable()
     {
-        PlayerHealth.PlayerDied += PlayerDied;
+        PlayerHealth.OnPlayerDeath += PlayerDied;
     }
 
-    private void PlayerDied()
+    private void PlayerDied(object sender, EventArgs e)
     {
         HandleShop();
     }
@@ -30,7 +31,7 @@ public class Shop : MonoBehaviour
         }
     }
 
-    private void OpenShop()
+    public void OpenShop()
     {
         shopCanvas.SetActive(true);
         isInShop = true;
@@ -40,11 +41,10 @@ public class Shop : MonoBehaviour
     {
         shopCanvas.SetActive(false);
         isInShop = false;
-        Player.stats.coins = 0;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        PlayerHealth.PlayerDied -= PlayerDied;
+        PlayerHealth.OnPlayerDeath -= PlayerDied;
     }
 }

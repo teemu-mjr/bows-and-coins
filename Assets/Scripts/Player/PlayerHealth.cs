@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,7 @@ using TMPro;
 
 public class PlayerHealth : Health
 {
-    public delegate void OnPlayerDeath();
-    public static event OnPlayerDeath PlayerDied;
+    public static event EventHandler OnPlayerDeath;
 
     public TextMeshProUGUI hpText;
 
@@ -29,9 +29,9 @@ public class PlayerHealth : Health
     {
         hpText.text = $"HP: {health}";
     }
+
     public override void Die()
     {
-        Time.timeScale = 0;
-        PlayerDied();
+        OnPlayerDeath?.Invoke(this, EventArgs.Empty);
     }
 }

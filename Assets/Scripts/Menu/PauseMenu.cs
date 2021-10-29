@@ -11,11 +11,15 @@ public class PauseMenu : MonoBehaviour
 
     private PlayerInputActions inputActions;
 
+    private void OnEnable()
+    {
+        inputActions.UI.Pause.performed += HandlePause;
+    }
+
     private void Awake()
     {
         inputActions = new PlayerInputActions();
         inputActions.UI.Enable();
-        inputActions.UI.Pause.performed += HandlePause;
     }
 
     public void HandlePause(InputAction.CallbackContext context)
@@ -49,7 +53,7 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (inputActions != null)
         {

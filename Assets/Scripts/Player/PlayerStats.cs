@@ -29,14 +29,15 @@ public class PlayerStats
         coins = 0;
     }
 
-    public PlayerStats(float movementSpeed, float drawBackDelay, bool repeater, float arrowSpeed, float flightTimeMax, float arrowDamage)
-    {
-        this.movementSpeed = movementSpeed;
-        this.drawBackDelay = drawBackDelay;
-        this.repeater = repeater;
-        this.arrowSpeed = arrowSpeed;
-        this.flightTimeMax = flightTimeMax;
-        this.arrowDamage = arrowDamage;
-    }
+    //public PlayerStats(float movementSpeed, float drawBackDelay, bool repeater, float arrowSpeed, float flightTimeMax, float arrowDamage, int coins)
+    //{
+    //    this.movementSpeed = movementSpeed;
+    //    this.drawBackDelay = drawBackDelay;
+    //    this.repeater = repeater;
+    //    this.arrowSpeed = arrowSpeed;
+    //    this.flightTimeMax = flightTimeMax;
+    //    this.arrowDamage = arrowDamage;
+    //    this.coins = coins;
+    //}
 
 }

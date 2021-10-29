@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions.Player.Enable();
     }
 
-    // Update is called once per frame
     void Update()
     {
         movementVector = playerInputActions.Player.Move.ReadValue<Vector2>();

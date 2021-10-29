@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Public field
     public Shop shop;
 
+    // Private fields
     private PlayerInputActions playerInputActions;
     private Player player;
+
+    // Events
+    public static event EventHandler OnGameStart;
+
+    private void OnEnable()
+    {
+        playerInputActions.Player.Reset.performed += PlayerLoadScene_performed;
+        PlayerHealth.OnPlayerDeath += OnPlayerDeath;
+        Inventory.OnBuyStat += Inventory_OnBuyStat;
+    }
+
+
+    private void Awake()
+    {
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+
+    }
 
     private void Start()
     {
@@ -19,36 +40,37 @@ public class GameManager : MonoBehaviour
 
         // Creating the only player instance of the game
         player = new Player();
-        PlayerHealth.PlayerDied += OnPlayerDeath;
+        OnGameStart(this, EventArgs.Empty);
     }
 
-    private void Awake()
+    public void LoadScene()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
-
-        playerInputActions.Player.Reset.performed += PlayerLoadScenePerformed;
-    }
-
-    private void LoadScene()
-    {
+        Player.stats.coins = 0;
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
-
-    private void PlayerLoadScenePerformed(InputAction.CallbackContext context)
-    {
-        LoadScene();
-    }
-
-    private void OnPlayerDeath()
+    private void Inventory_OnBuyStat(object sender, EventArgs e)
     {
         player.SavePlayer();
     }
 
-    private void OnDestroy()
+    private void PlayerLoadScene_performed(InputAction.CallbackContext context)
+    {
+        LoadScene();
+    }
+
+    private void OnPlayerDeath(object sender, EventArgs e)
+    {
+        player.SavePlayer();
+        shop.OpenShop();
+        Time.timeScale = 0;
+    }
+
+    private void OnDisable()
     {
         // Remove subscriptions
-        PlayerHealth.PlayerDied -= OnPlayerDeath;
+        PlayerHealth.OnPlayerDeath -= OnPlayerDeath;
+        playerInputActions.Player.Reset.performed -= PlayerLoadScene_performed;
+        Inventory.OnBuyStat -= Inventory_OnBuyStat;
     }
 }
