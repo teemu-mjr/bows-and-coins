@@ -995,10 +995,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 339921049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d2da0a2986597b42a1a866ed91dc0f9, type: 3}
+  m_Script: {fileID: 11500000, guid: da1c784b85dbca44193ff25ad9b7b073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinText: {fileID: 33567947}
+  shopCanvas: {fileID: 339921049}
 --- !u!1 &345009332
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,7 +2718,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1053987051}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1570967990}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: BuyStat
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hmm
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1053987051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3998,6 +4010,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4764250337768439556, guid: 8514a117a545a36469c79563a570cf61, type: 3}
   m_PrefabInstance: {fileID: 4764250337917420194}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1570967990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1106520536200872866, guid: 8514a117a545a36469c79563a570cf61, type: 3}
+  m_PrefabInstance: {fileID: 4764250337917420194}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570967989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71406e0cf0aa0fc49ac2eda86ff41371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1570967995
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4765,13 +4788,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2013781341}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5291,10 +5314,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 339921053}
-        m_TargetAssemblyTypeName: BuyItems, Assembly-CSharp
+      - m_Target: {fileID: 1570967990}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: BuyStat
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

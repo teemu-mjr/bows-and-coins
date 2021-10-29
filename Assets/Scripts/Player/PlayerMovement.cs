@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.velocity.magnitude < 10)
         {
-            rb.AddForce(new Vector3(movementVector.x, 0, movementVector.y) * Player.stats.movementSpeed);
+            rb.AddForce(new Vector3(movementVector.x, 0, movementVector.y) * Player.stats.movementSpeed.value);
         }
     }
 

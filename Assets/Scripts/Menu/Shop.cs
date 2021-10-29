@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    // public fields
     public static bool isInShop = false;
-
     public GameObject shopCanvas;
+
+    // Events
+    public event EventHandler<ShopEventArgs> OnBuyStat;
 
     private void OnEnable()
     {
@@ -41,6 +44,11 @@ public class Shop : MonoBehaviour
     {
         shopCanvas.SetActive(false);
         isInShop = false;
+    }
+
+    public void BuyPlayerStat(string statName)
+    {
+        OnBuyStat?.Invoke(this, new ShopEventArgs { statName = statName });
     }
 
     private void OnDisable()

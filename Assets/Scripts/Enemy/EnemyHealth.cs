@@ -33,7 +33,7 @@ public class EnemyHealth : Health
         if (other.CompareTag("PlayerArrow"))
         {
             Arrow arrow = other.gameObject.GetComponent<Arrow>();
-            TakeDamage(Player.stats.arrowDamage * arrow.heldBackProcentage);
+            TakeDamage(Player.stats.arrowDamage.value * arrow.heldBackProcentage);
         }
     }
 

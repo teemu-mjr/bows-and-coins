@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        heldBackProcentage = heldBackTime / Player.stats.drawBackDelay;
+        heldBackProcentage = heldBackTime / Player.stats.drawBackDelay.value;
 
         // Limit held back procentage to 1 (100%)
         if (heldBackProcentage > 1)
@@ -22,9 +22,9 @@ public class Arrow : MonoBehaviour
             heldBackProcentage = 1;
         }
 
-        rb.velocity = transform.forward * Player.stats.arrowSpeed * heldBackProcentage;
+        rb.velocity = transform.forward * Player.stats.arrowSpeed.value * heldBackProcentage;
 
-        flightTimeMax = Player.stats.flightTimeMax * heldBackProcentage;
+        flightTimeMax = Player.stats.flightTimeMax.value * heldBackProcentage;
     }
 
     private void FixedUpdate()

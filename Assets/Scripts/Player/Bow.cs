@@ -40,7 +40,7 @@ public class Bow : MonoBehaviour
     {
         heldBackTime += Time.deltaTime;
         RotatePlayerWithInputVector(shootingVector);
-        if (Player.stats.repeater && heldBackTime / Player.stats.drawBackDelay >= 1)
+        if (Player.stats.repeater && heldBackTime / Player.stats.drawBackDelay.value >= 1)
         {
             Shoot();
         }
@@ -53,7 +53,7 @@ public class Bow : MonoBehaviour
 
     private void Shoot()
     {
-        if (heldBackTime / Player.stats.drawBackDelay > 0.2f)
+        if (heldBackTime / Player.stats.drawBackDelay.value > 0.2f)
         {
             arrow.GetComponent<Arrow>().heldBackTime = heldBackTime;
             Instantiate(arrow, (transform.position + transform.forward * 0.8f), transform.rotation);
