@@ -17,19 +17,14 @@ public class GameManager : MonoBehaviour
     // Events
     public static event EventHandler OnGameStart;
 
-    private void OnEnable()
-    {
-        playerInputActions.Player.Reset.performed += PlayerLoadScene_performed;
-        PlayerHealth.OnPlayerDeath += OnPlayerDeath;
-        Inventory.OnBuyStat += Inventory_OnBuyStat;
-    }
-
 
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
+        playerInputActions.Player.Reset.performed += PlayerLoadScene_performed;
+        PlayerHealth.OnPlayerDeath += OnPlayerDeath;
     }
 
     private void Start()
@@ -45,13 +40,12 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene()
     {
+        // TODO: Reset money / open the shop better
         Player.stats.coins = 0;
+        player.SavePlayer();
+
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
-    }
-    private void Inventory_OnBuyStat(object sender, EventArgs e)
-    {
-        player.SavePlayer();
     }
 
     private void PlayerLoadScene_performed(InputAction.CallbackContext context)
@@ -70,7 +64,6 @@ public class GameManager : MonoBehaviour
     {
         // Remove subscriptions
         PlayerHealth.OnPlayerDeath -= OnPlayerDeath;
-        playerInputActions.Player.Reset.performed -= PlayerLoadScene_performed;
-        Inventory.OnBuyStat -= Inventory_OnBuyStat;
+        playerInputActions.Player.Reset.performed -= PlayerLoadScene_performed; 
     }
 }

@@ -9,8 +9,13 @@ public class PlayerStat
     public float value;
     public float cost;
 
+
     public void IncrementStat()
     {
         Debug.Log($"{name} incremented");
+        level++;
+        cost += 100;
+
+        value += 50;
     }
 }

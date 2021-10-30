@@ -2,19 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
     // public fields
     public static bool isInShop = false;
     public GameObject shopCanvas;
+    public TextMeshProUGUI shopCoinText;
 
     // Events
-    public event EventHandler<ShopEventArgs> OnBuyStat;
+    public static event EventHandler<ShopEventArgs> OnBuyStat;
 
-    private void OnEnable()
+    private void Awake()
     {
         PlayerHealth.OnPlayerDeath += PlayerDied;
+    }
+
+    public void BuyPlayerStat(string statName)
+    {
+        OnBuyStat?.Invoke(this, new ShopEventArgs { statName = statName });
     }
 
     private void PlayerDied(object sender, EventArgs e)
@@ -46,13 +53,10 @@ public class Shop : MonoBehaviour
         isInShop = false;
     }
 
-    public void BuyPlayerStat(string statName)
-    {
-        OnBuyStat?.Invoke(this, new ShopEventArgs { statName = statName });
-    }
 
     private void OnDisable()
     {
+        // Unsubscribes
         PlayerHealth.OnPlayerDeath -= PlayerDied;
     }
 }

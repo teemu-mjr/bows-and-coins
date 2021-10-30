@@ -29,10 +29,6 @@ public class Bow : MonoBehaviour
         {
             HandleShooting();
         }
-        else if (!isShooting && heldBackTime != 0)
-        {
-
-        }
     }
 
 

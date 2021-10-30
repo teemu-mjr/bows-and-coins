@@ -13,6 +13,9 @@ public class PlayerStats
     public PlayerStat flightTimeMax = new PlayerStat();
     public PlayerStat arrowDamage = new PlayerStat();
 
+    // Array of all the stats
+    private PlayerStat[] IncrementableStats;
+
     // public fields
     public bool repeater;
     public int coins;
@@ -23,6 +26,20 @@ public class PlayerStats
     /// </summary>
     public PlayerStats()
     {
+        movementSpeed.name = "moveSpeed";
+        drawBackDelay.name = "drawBackDelay";
+        arrowSpeed.name = "arrowSpeed";
+        flightTimeMax.name = "flightTimeMax";
+        arrowDamage.name = "arrowDamage";
+
+        IncrementableStats = new PlayerStat[] {
+            movementSpeed,
+            drawBackDelay,
+            arrowSpeed,
+            flightTimeMax,
+            arrowDamage
+        };
+
         movementSpeed.value = 600;
         drawBackDelay.value = 3;
         arrowSpeed.value = 8;
@@ -31,29 +48,19 @@ public class PlayerStats
 
         repeater = false;
         coins = 0;
+
+        Shop.OnBuyStat += IncrementStat;
     }
 
-
-    //public float movementSpeed;
-    //public float drawBackDelay;
-    //public bool repeater;
-    //public float arrowSpeed;
-    //public float flightTimeMax;
-    //public float arrowDamage;
-    //public int coins;
-
-    ///// <summary>
-    ///// Default constructor
-    ///// Will give the starting stats
-    ///// </summary>
-    //public PlayerStats()
-    //{
-    //    movementSpeed = 600;
-    //    drawBackDelay = 3f;
-    //    repeater = false;
-    //    arrowSpeed = 8;
-    //    flightTimeMax = 1f;
-    //    arrowDamage = 1;
-    //    coins = 0;
-    //}
+    public void IncrementStat(object sender, ShopEventArgs e)
+    {
+        for (int i = 0; i < IncrementableStats.Length; i++)
+        {
+            if (IncrementableStats[i].name == e.statName)
+            {
+                IncrementableStats[i].IncrementStat();
+                break;
+            }
+        }
+    }
 }
