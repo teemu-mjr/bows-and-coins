@@ -7,11 +7,12 @@ public class Bow : MonoBehaviour
 {
     public GameObject arrow;
 
-    [HideInInspector] public static float heldBackTime = 0;
+    [HideInInspector] public static float heldBackProcentage = 0;
     [HideInInspector] public static bool isShooting = false;
 
     private PlayerInputActions playerInputActions;
     private Vector2 shootingVector;
+    private float heldBackTime = 0;
 
     private void Awake()
     {
@@ -29,14 +30,29 @@ public class Bow : MonoBehaviour
         {
             HandleShooting();
         }
+        else if (!isShooting && heldBackTime > 0)
+        {
+            heldBackTime = 0;
+            heldBackProcentage = 0;
+        }
     }
 
 
     private void HandleShooting()
     {
         heldBackTime += Time.deltaTime;
+
+        if (heldBackProcentage < 1)
+        {
+            heldBackProcentage = heldBackTime / Player.stats.drawBackDelay.value;
+        }
+        else if (heldBackProcentage > 1)
+        {
+            heldBackProcentage = 1;
+        }
+
         RotatePlayerWithInputVector(shootingVector);
-        if (Player.stats.repeater && heldBackTime / Player.stats.drawBackDelay.value >= 1)
+        if (Player.stats.repeater && heldBackProcentage >= 1)
         {
             Shoot();
         }
@@ -51,10 +67,11 @@ public class Bow : MonoBehaviour
     {
         if (heldBackTime / Player.stats.drawBackDelay.value > 0.2f)
         {
-            arrow.GetComponent<Arrow>().heldBackTime = heldBackTime;
+            arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
             Instantiate(arrow, (transform.position + transform.forward * 0.8f), transform.rotation);
         }
         heldBackTime = 0;
+        heldBackProcentage = 0;
     }
 
     private void RotatePlayerWithInputVector(Vector2 rotatingVector)

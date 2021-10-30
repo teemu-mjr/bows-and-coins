@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [HideInInspector] public float heldBackTime;
     [HideInInspector] public float heldBackProcentage;
 
     private Rigidbody rb;
@@ -14,7 +13,6 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        heldBackProcentage = heldBackTime / Player.stats.drawBackDelay.value;
 
         // Limit held back procentage to 1 (100%)
         if (heldBackProcentage > 1)
