@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class TransformCameraOnNextWave : MonoBehaviour
         ArenaController.OnNextWave += TransformObject;
     }
 
-    private void TransformObject()
+    private void TransformObject(object sender, EventArgs e)
     {
         Camera.main.orthographicSize += growAmount;
     }

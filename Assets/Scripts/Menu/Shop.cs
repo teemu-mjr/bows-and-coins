@@ -17,11 +17,18 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         PlayerHealth.OnPlayerDeath += PlayerDied;
+        UpdateCoins();
     }
 
     public void BuyPlayerStat(string statName)
     {
         OnBuyStat?.Invoke(this, new ShopEventArgs { statName = statName });
+        UpdateCoins();
+    }
+
+    private void UpdateCoins()
+    {
+        shopCoinText.text = $"You have {Player.stats.coins.ToString()} to spent";
     }
 
     private void PlayerDied(object sender, EventArgs e)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerHealth : Health
+public class PlayerHealth : MonoBehaviour
 {
     // events
     public static event EventHandler OnPlayerDeath;
@@ -14,6 +14,7 @@ public class PlayerHealth : Health
 
     // private fields
     private static bool isAlive = true;
+    private float health;
 
     // Propertyes
     public static bool IsAlive
@@ -30,7 +31,7 @@ public class PlayerHealth : Health
         isAlive = true;
     }
 
-    public override void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         UpdateHealthText(health);
@@ -45,7 +46,7 @@ public class PlayerHealth : Health
         hpText.text = $"HP: {health}";
     }
 
-    public override void Die()
+    public void Die()
     {
         isAlive = false;
         OnPlayerDeath?.Invoke(this, EventArgs.Empty);

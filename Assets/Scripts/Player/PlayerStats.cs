@@ -7,15 +7,11 @@ using UnityEngine;
 public class PlayerStats
 {
     // player stats
-    public PlayerStat movementSpeed = new PlayerStat();
-    public PlayerStat drawBackDelay = new PlayerStat();
-    public PlayerStat arrowSpeed = new PlayerStat();
-    public PlayerStat flightTimeMax = new PlayerStat();
-    public PlayerStat arrowDamage = new PlayerStat();
-
-    // Array of all the stats
-    private PlayerStat[] IncrementableStats;
-
+    public PlayerStat movementSpeed;
+    public PlayerStat drawBackDelay;
+    public PlayerStat arrowSpeed;
+    public PlayerStat flightTimeMax;
+    public PlayerStat arrowDamage;
     // public fields
     public bool repeater;
     public int coins;
@@ -26,26 +22,11 @@ public class PlayerStats
     /// </summary>
     public PlayerStats()
     {
-        movementSpeed.name = "moveSpeed";
-        drawBackDelay.name = "drawBackDelay";
-        arrowSpeed.name = "arrowSpeed";
-        flightTimeMax.name = "flightTimeMax";
-        arrowDamage.name = "arrowDamage";
-
-        IncrementableStats = new PlayerStat[] {
-            movementSpeed,
-            drawBackDelay,
-            arrowSpeed,
-            flightTimeMax,
-            arrowDamage
-        };
-
-        movementSpeed.value = 600;
-        drawBackDelay.value = 3;
-        arrowSpeed.value = 8;
-        flightTimeMax.value = 1;
-        arrowDamage.value = 1;
-
+        movementSpeed = new PlayerStat() { name = "moveSpeed", value = 600, maxValue = 3000 };
+        drawBackDelay = new PlayerStat() { name = "drawBackDelay", value = 3, maxValue = 0.1f };
+        arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 8, maxValue = 50 };
+        flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
+        arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
         repeater = false;
         coins = 0;
 
@@ -54,13 +35,29 @@ public class PlayerStats
 
     public void IncrementStat(object sender, ShopEventArgs e)
     {
-        for (int i = 0; i < IncrementableStats.Length; i++)
+        switch (e.statName)
         {
-            if (IncrementableStats[i].name == e.statName)
-            {
-                IncrementableStats[i].IncrementStat();
+            case "moveSpeed":
+                movementSpeed.IncrementStat(50);
                 break;
-            }
+            case "drawBackDelay":
+                drawBackDelay.DevideStat(2);
+                break;
+            case "arrowSpeed":
+                arrowSpeed.IncrementStat(10);
+                break;
+            case "flightTimeMax":
+                flightTimeMax.IncrementStat(1);
+                break;
+            case "arrowDamage":
+                arrowDamage.IncrementStat(1);
+                break;
+            case "repeater":
+                repeater = true;
+                break;
+            default:
+                Debug.Log("Could not find the stat to increment");
+                break;
         }
     }
 }
