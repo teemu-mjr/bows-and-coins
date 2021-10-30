@@ -17,7 +17,6 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         PlayerHealth.OnPlayerDeath += PlayerDied;
-        UpdateCoins();
     }
 
     public void BuyPlayerStat(string statName)
@@ -41,6 +40,7 @@ public class Shop : MonoBehaviour
         if (!isInShop)
         {
             OpenShop();
+            UpdateCoins();
         }
         else if (isInShop)
         {

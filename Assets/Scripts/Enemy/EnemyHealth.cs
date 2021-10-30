@@ -6,11 +6,12 @@ public class EnemyHealth : MonoBehaviour
 {
     public GameObject itemToDrop;
 
-    private float health = ArenaController.enemyHealth.Value;
+    private float health;
     private int dropAmount = 3;
 
     private void Start()
     {
+        health = ArenaController.enemyHealth.Value;
         dropAmount = Mathf.RoundToInt(ArenaController.coinDropAmount.Value);
     }
 

@@ -38,16 +38,16 @@ public class PlayerStats
         switch (e.statName)
         {
             case "moveSpeed":
-                movementSpeed.IncrementStat(50);
+                movementSpeed.IncrementStat(15);
                 break;
             case "drawBackDelay":
-                drawBackDelay.DevideStat(2);
+                drawBackDelay.DevideStat(1.1f);
                 break;
             case "arrowSpeed":
-                arrowSpeed.IncrementStat(10);
+                arrowSpeed.IncrementStat(2);
                 break;
             case "flightTimeMax":
-                flightTimeMax.IncrementStat(1);
+                flightTimeMax.IncrementStat(0.25f);
                 break;
             case "arrowDamage":
                 arrowDamage.IncrementStat(1);

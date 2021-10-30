@@ -6700,10 +6700,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 135742315354743619, guid: 8514a117a545a36469c79563a570cf61, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1106520536200872866, guid: 8514a117a545a36469c79563a570cf61, type: 3}
       propertyPath: coinText
       value: 
@@ -6804,7 +6800,5 @@ PrefabInstance:
       propertyPath: hpText
       value: 
       objectReference: {fileID: 1001486079}
-    m_RemovedComponents:
-    - {fileID: 4764250337071593261, guid: 8514a117a545a36469c79563a570cf61, type: 3}
-    - {fileID: 135742315354743619, guid: 8514a117a545a36469c79563a570cf61, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8514a117a545a36469c79563a570cf61, type: 3}

@@ -42,10 +42,10 @@ public class ArenaController : MonoBehaviour
         dasherSpeed = new DifficultyMultiplyer(75, 5, 250);
         coinDropAmount = new DifficultyMultiplyer(1, 1, 20);
 
-        for (int i = 0; i < 50; i++)
-        {
-            HandleNextWave(false);
-        }
+        //for (int i = 0; i < 50; i++)
+        //{
+        //    HandleNextWave(false);
+        //}
     }
 
     private void Action_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
