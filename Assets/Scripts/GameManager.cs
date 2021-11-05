@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // creating player input actions
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
+        // subscriptions
         playerInputActions.Player.Reset.performed += PlayerLoadScene_performed;
         PlayerHealth.OnPlayerDeath += OnPlayerDeath;
     }
@@ -33,9 +35,9 @@ public class GameManager : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
 
-        // Creating the only player instance of the game
+        // creating the only player instance of the game
         player = new Player();
-        OnGameStart(this, EventArgs.Empty);
+        OnGameStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void LoadScene()
@@ -55,14 +57,15 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerDeath(object sender, EventArgs e)
     {
+        playerInputActions.Player.Disable();
+        Time.timeScale = 0;
         player.SavePlayer();
         shop.OpenShop();
-        Time.timeScale = 0;
     }
 
     private void OnDisable()
     {
-        // Remove subscriptions
+        // remove subscriptions
         PlayerHealth.OnPlayerDeath -= OnPlayerDeath;
         playerInputActions.Player.Reset.performed -= PlayerLoadScene_performed; 
     }

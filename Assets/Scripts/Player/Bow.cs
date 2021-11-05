@@ -54,7 +54,7 @@ public class Bow : MonoBehaviour
         }
 
         RotatePlayerWithInputVector(shootingVector);
-        if (Player.stats.repeater && heldBackProcentage >= 1)
+        if (Player.stats.repeater.value == 1 && heldBackProcentage >= 1)
         {
             Shoot();
         }

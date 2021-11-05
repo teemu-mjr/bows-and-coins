@@ -31,7 +31,5 @@ public class DifficultyMultiplyer
         {
             value -= incrementingValue;
         }
-
-        Debug.Log(value);
     }
 }

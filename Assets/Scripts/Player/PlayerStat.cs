@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,31 +9,57 @@ public class PlayerStat
     public int level;
     public float value;
     public float maxValue;
+    public int cost = 5;
 
-    public float cost;
+    public bool maxed = false;
 
-
-    public void IncrementStat(float addValue)
+    public bool Increment(float addValue)
     {
-        Debug.Log($"{name} incremented");
-        level++;
-        cost += 100;
-
-        if(value + addValue > 0)
+        if (Player.stats.coins >= cost && !maxed)
         {
-            value += addValue;
+            level++;
+            cost += 5;
+
+            if (value + addValue <= maxValue)
+            {
+                value += addValue;
+            }
+            else
+            {
+                maxed = true;
+                Debug.Log($"{name} MAXED!");
+            }
+            Player.stats.coins -= cost;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-    public void DevideStat(float devideValue)
+    public bool Devide(float devideValue)
     {
-        Debug.Log($"{name} devided");
-        level++;
-        cost += 100;
-
-        if (value / devideValue > 0)
+        if (Player.stats.coins >= cost && !maxed)
         {
-            value /= devideValue;
+            level++;
+            cost += 5;
+
+            if (value / devideValue >= maxValue)
+            {
+                value /= devideValue;
+            }
+            else
+            {
+                maxed = true;
+                Debug.Log($"{name} MAXED!");
+            }
+            Player.stats.coins -= cost;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

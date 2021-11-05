@@ -12,8 +12,9 @@ public class PlayerStats
     public PlayerStat arrowSpeed;
     public PlayerStat flightTimeMax;
     public PlayerStat arrowDamage;
+    public PlayerStat repeater;
+
     // public fields
-    public bool repeater;
     public int coins;
 
     /// <summary>
@@ -22,42 +23,59 @@ public class PlayerStats
     /// </summary>
     public PlayerStats()
     {
-        movementSpeed = new PlayerStat() { name = "moveSpeed", value = 600, maxValue = 3000 };
+        movementSpeed = new PlayerStat() { name = "moveSpeed", value = 500, maxValue = 1000 };
         drawBackDelay = new PlayerStat() { name = "drawBackDelay", value = 3, maxValue = 0.1f };
         arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 8, maxValue = 50 };
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
-        repeater = false;
+        repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250};
         coins = 0;
-
-        Shop.OnBuyStat += IncrementStat;
     }
 
-    public void IncrementStat(object sender, ShopEventArgs e)
+    public bool IncrementStat(string statName)
     {
-        switch (e.statName)
+        bool couldBoy = false;
+        switch (statName)
         {
             case "moveSpeed":
-                movementSpeed.IncrementStat(15);
+                couldBoy = movementSpeed.Increment(26.4f);
                 break;
             case "drawBackDelay":
-                drawBackDelay.DevideStat(1.1f);
+                couldBoy = drawBackDelay.Devide(1.2f);
                 break;
             case "arrowSpeed":
-                arrowSpeed.IncrementStat(2);
+                couldBoy = arrowSpeed.Increment(2.25f);
                 break;
             case "flightTimeMax":
-                flightTimeMax.IncrementStat(0.25f);
+                couldBoy = flightTimeMax.Increment(0.079f);
                 break;
             case "arrowDamage":
-                arrowDamage.IncrementStat(1);
+                couldBoy = arrowDamage.Increment(2.6f);
                 break;
             case "repeater":
-                repeater = true;
+                couldBoy = repeater.Increment(1);
                 break;
             default:
                 Debug.Log("Could not find the stat to increment");
-                break;
+                return false;
         }
+        if (couldBoy)
+        {
+            IncrementCost(2);
+        }
+
+        return couldBoy;
     }
-}
+
+    private void IncrementCost(int amount)
+    {
+        movementSpeed.cost += amount;
+        drawBackDelay.cost += amount;
+        arrowSpeed.cost += amount;
+        flightTimeMax.cost += amount;
+        arrowDamage.cost += amount;
+        repeater.cost += amount;
+    }
+
+
+}   
