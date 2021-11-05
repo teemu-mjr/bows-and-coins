@@ -91,7 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4764250337768439557}
   - component: {fileID: 1419536307973394207}
-  - component: {fileID: 135742315354743619}
   - component: {fileID: 4764250337768439563}
   - component: {fileID: 4764250337768439562}
   - component: {fileID: 4764250337768439560}
@@ -132,20 +131,6 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &135742315354743619
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4764250337768439556}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4764250337768439563
@@ -201,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da77610a27917349b3172e4b29dd594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
   hpText: {fileID: 0}
 --- !u!114 &1106520536200872866
 MonoBehaviour:
@@ -275,7 +259,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f457aa5e85e02a5409dcd9a05ab8fb78, type: 2}
+  - {fileID: 2100000, guid: fe75410700d9ec74782d6a099b4505a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

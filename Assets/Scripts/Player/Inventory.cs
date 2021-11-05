@@ -9,9 +9,6 @@ public class Inventory : MonoBehaviour
     // Public fields
     public TextMeshProUGUI coinText;
 
-    // Events
-    public static event EventHandler OnBuyStat;
-
     private void OnEnable()
     {
         GameManager.OnGameStart += GameManager_OnGameStart;
@@ -19,13 +16,8 @@ public class Inventory : MonoBehaviour
 
     private void GameManager_OnGameStart(object sender, EventArgs e)
     {
+        // Showing the correct amount on scene load
         AddCoins(0);
-    }
-
-    public void BuyStat(string statName)
-    {
-        OnBuyStat?.Invoke(this, EventArgs.Empty);
-        Debug.Log(statName);
     }
 
     public void AddCoins(int amount)

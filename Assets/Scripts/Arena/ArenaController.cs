@@ -1,29 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class ArenaController : MonoBehaviour
 {
+    // public fields
     public List<GameObject> enemies;
     public Vector2 spawnArea;
     public TextMeshProUGUI waveText;
 
-    private static float difficultyMultiplyer;
-    public delegate void NextWave();
-    public static event NextWave OnNextWave;
+    // events
+    public static event EventHandler OnNextWave;
 
+    //private fields
     private int waveNumber;
 
+    // player input actions
     PlayerInputActions playerInputActions;
 
-    public static float DifficultyMultiplyer
-    {
-        get
-        {
-            return difficultyMultiplyer;
-        }
-    }
+    // difficulty values
+    public static DifficultyMultiplyer enemyHealth;
+    public static DifficultyMultiplyer enemyArrowSpeed;
+    public static DifficultyMultiplyer enemyShotInterval;
+    public static DifficultyMultiplyer dasherSpeed;
+    public static DifficultyMultiplyer coinDropAmount;
+
     void Start()
     {
         playerInputActions = new PlayerInputActions();
@@ -31,14 +35,18 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Action.performed += Action_performed;
 
         waveNumber = 0;
-        difficultyMultiplyer = 1;
+                
+        enemyHealth = new DifficultyMultiplyer(1, 0.5f, 30);
+        enemyArrowSpeed = new DifficultyMultiplyer(5, 0.125f, 10);
+        enemyShotInterval = new DifficultyMultiplyer(3, 0.05f, 0.75f, true);
+        dasherSpeed = new DifficultyMultiplyer(75, 5, 250);
+        coinDropAmount = new DifficultyMultiplyer(1, 1, 20);
     }
 
     private void Action_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         HandleNextWave();
         GrowSpawnArea();
-        OnNextWave();
     }
 
     private void OnDrawGizmos()
@@ -51,12 +59,22 @@ public class ArenaController : MonoBehaviour
         spawnArea += new Vector2(.8f, .45f);
     }
 
-    private void HandleNextWave()
+    private void HandleNextWave(bool spawn = true)
     {
+        OnNextWave(this, EventArgs.Empty);
         waveNumber++;
-        difficultyMultiplyer += 0.125f;
         waveText.text = $"Wave: {waveNumber.ToString()}";
-        SpawnEnemies(Mathf.RoundToInt(1 + difficultyMultiplyer));
+        if (spawn)
+        {
+            SpawnEnemies(Mathf.RoundToInt(waveNumber));
+        }
+
+        // increment all difficulty multiplyers
+        enemyHealth.Increment();
+        enemyArrowSpeed.Increment();
+        enemyShotInterval.Increment();
+        dasherSpeed.Increment();
+        coinDropAmount.Increment();
     }
 
     private void SpawnEnemies(int amount)
@@ -70,7 +88,7 @@ public class ArenaController : MonoBehaviour
 
     private Vector2 RandomVector2()
     {
-        return (new Vector2(Random.Range(-spawnArea.x / 2, spawnArea.x / 2), Random.Range(-spawnArea.y / 2, spawnArea.y / 2)));
+        return new Vector2(Random.Range(-spawnArea.x / 2, spawnArea.x / 2), Random.Range(-spawnArea.y / 2, spawnArea.y / 2));
     }
 
     private void OnDestroy()

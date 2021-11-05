@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class TransformOnNextWave : MonoBehaviour
         ArenaController.OnNextWave += TransformObject;
     }
 
-    private void TransformObject()
+    private void TransformObject(object sender, EventArgs e)
     {
         transform.position += positionToAdd;
         transform.localScale += scaleToAdd;

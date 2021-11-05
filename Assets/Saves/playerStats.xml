@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PlayerStats xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <movementSpeed>
-    <level>0</level>
-    <value>600</value>
-    <cost>0</cost>
+    <name>moveSpeed</name>
+    <level>1</level>
+    <value>500</value>
+    <maxValue>1000</maxValue>
+    <cost>5</cost>
+    <maxed>false</maxed>
   </movementSpeed>
   <drawBackDelay>
-    <level>0</level>
+    <name>drawBackDelay</name>
+    <level>1</level>
     <value>3</value>
-    <cost>0</cost>
+    <maxValue>0.1</maxValue>
+    <cost>5</cost>
+    <maxed>false</maxed>
   </drawBackDelay>
   <arrowSpeed>
-    <level>0</level>
+    <name>arrowSpeed</name>
+    <level>1</level>
     <value>8</value>
-    <cost>0</cost>
+    <maxValue>50</maxValue>
+    <cost>5</cost>
+    <maxed>false</maxed>
   </arrowSpeed>
   <flightTimeMax>
-    <level>0</level>
-    <value>1</value>
-    <cost>0</cost>
+    <name>flightTimeMax</name>
+    <level>1</level>
+    <value>0.5</value>
+    <maxValue>2</maxValue>
+    <cost>5</cost>
+    <maxed>false</maxed>
   </flightTimeMax>
   <arrowDamage>
-    <level>0</level>
+    <name>arrowDamage</name>
+    <level>1</level>
     <value>1</value>
-    <cost>0</cost>
+    <maxValue>50</maxValue>
+    <cost>5</cost>
+    <maxed>false</maxed>
   </arrowDamage>
-  <repeater>false</repeater>
-  <coins>0</coins>
+  <repeater>
+    <name>repeater</name>
+    <level>0</level>
+    <value>0</value>
+    <maxValue>1</maxValue>
+    <cost>250</cost>
+    <maxed>false</maxed>
+  </repeater>
+  <coins>100000</coins>
 </PlayerStats>

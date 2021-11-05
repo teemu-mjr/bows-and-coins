@@ -2,18 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : Health
+public class EnemyHealth : MonoBehaviour
 {
     public GameObject itemToDrop;
 
+    private float health;
     private int dropAmount = 3;
 
     private void Start()
     {
-        dropAmount = Mathf.RoundToInt(dropAmount * ArenaController.DifficultyMultiplyer);
+        health = ArenaController.enemyHealth.Value;
+        dropAmount = Mathf.RoundToInt(ArenaController.coinDropAmount.Value);
     }
 
-    public override void Die()
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
     {
         DropItem();
         Destroy(gameObject);

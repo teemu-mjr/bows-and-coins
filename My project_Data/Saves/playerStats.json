@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PlayerStats xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <movementSpeed>600</movementSpeed>
+  <drawBackDelay>3</drawBackDelay>
+  <repeater>false</repeater>
+  <arrowSpeed>8</arrowSpeed>
+  <flightTimeMax>1</flightTimeMax>
+  <arrowDamage>1</arrowDamage>
+  <coins>32</coins>
+</PlayerStats>

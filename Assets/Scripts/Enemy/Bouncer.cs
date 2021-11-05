@@ -11,16 +11,15 @@ public class Bouncer : Enemy
     private float arrowSpeed = 5;
     private float speedX = 10;
     private float speedY = 10;
-    private float shotInterval = 4;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
         speedX = Random.Range(-maxSpeed, maxSpeed);
         speedY = Random.Range(-maxSpeed, maxSpeed);
-        arrowSpeed *= ArenaController.DifficultyMultiplyer;
+        arrowSpeed = ArenaController.enemyArrowSpeed.Value;
         arrow.GetComponent<EnemyArrow>().speed = arrowSpeed;
-        InvokeRepeating("ShootArrow", Random.Range(0.5f, 2f), shotInterval / ArenaController.DifficultyMultiplyer);
+        InvokeRepeating("ShootArrow", Random.Range(0.5f, 2f), ArenaController.enemyShotInterval.Value);
     }
 
     // Update is called once per frame
