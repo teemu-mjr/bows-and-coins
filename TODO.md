@@ -26,9 +26,9 @@
 
 ## Coding
 
--   [ ] Shop
+-   [X] Shop
     -   [x] Buying
-    -   [ ] Using coins
+    -   [X] Using coins
 
 ---
 
