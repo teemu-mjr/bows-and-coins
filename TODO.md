@@ -1,4 +1,4 @@
-## Bos and Coins TODO
+## Bows and Coins TODO
 
 ---
 
@@ -21,6 +21,12 @@
 -   [ ] Bouncer (Skeleton)
     -   [ ] Walking
     -   [ ] Shooting
+---
+
+## Particles/shaders
+
+- [ ] Player/enemy damage
+- [ ] Enemy death
 
 ---
 
@@ -28,7 +34,7 @@
 
 -   [X] Shop
     -   [x] Buying
-    -   [X] Using coins
+    -   [ ] Using coins
 
 ---
 
