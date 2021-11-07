@@ -40,19 +40,19 @@ public class GameManager : MonoBehaviour
         OnGameStart?.Invoke(this, EventArgs.Empty);
     }
 
-    public void LoadScene()
+    public void LoadScene(int sceneIndex)
     {
         // TODO: Reset money / open the shop better
         Player.stats.coins = 0;
         player.SavePlayer();
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(sceneIndex);
         Time.timeScale = 1;
     }
 
     private void PlayerLoadScene_performed(InputAction.CallbackContext context)
     {
-        LoadScene();
+        LoadScene(0);
     }
 
     private void OnPlayerDeath(object sender, EventArgs e)

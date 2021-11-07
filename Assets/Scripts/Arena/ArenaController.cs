@@ -13,7 +13,7 @@ public class ArenaController : MonoBehaviour
     public TextMeshProUGUI waveText;
 
     // events
-    public static event EventHandler OnNextWave;
+    public static event EventHandler<WaveArgs> OnNextWave;
 
     //private fields
     private int waveNumber;
@@ -27,6 +27,17 @@ public class ArenaController : MonoBehaviour
     public static DifficultyMultiplyer enemyShotInterval;
     public static DifficultyMultiplyer dasherSpeed;
     public static DifficultyMultiplyer coinDropAmount;
+
+    // WaveArgs
+    public class WaveArgs : EventArgs
+    {
+        public int waveNumber;
+
+        public WaveArgs(int waveNumber)
+        {
+            this.waveNumber = waveNumber;
+        }
+    }
 
     void Start()
     {
@@ -59,15 +70,12 @@ public class ArenaController : MonoBehaviour
         spawnArea += new Vector2(.8f, .45f);
     }
 
-    private void HandleNextWave(bool spawn = true)
+    private void HandleNextWave()
     {
-        OnNextWave(this, EventArgs.Empty);
         waveNumber++;
-        waveText.text = $"Wave: {waveNumber.ToString()}";
-        if (spawn)
-        {
-            SpawnEnemies(Mathf.RoundToInt(waveNumber));
-        }
+        OnNextWave(this, new WaveArgs(waveNumber));
+
+        SpawnEnemies(Mathf.RoundToInt(waveNumber));       
 
         // increment all difficulty multiplyers
         enemyHealth.Increment();

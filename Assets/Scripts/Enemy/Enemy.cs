@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public float startupFreeze = 1f;
     public bool isFrozen = true;
     public float damage = 1;
-    public float knockBackForce = 10;
+    public float knockBackForce = 100;
     public float timeAlive = 0;
 
 

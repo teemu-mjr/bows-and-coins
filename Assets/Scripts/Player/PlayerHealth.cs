@@ -7,10 +7,19 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     // events
+    public static event EventHandler<HealthArgs> OnPlayerDamage;
     public static event EventHandler OnPlayerDeath;
 
-    // public fields
-    public TextMeshProUGUI hpText;
+    // HealthArgs
+    public class HealthArgs : EventArgs
+    {
+        public float health;
+
+        public HealthArgs(float health)
+        {
+            this.health = health;
+        }
+    }
 
     // private fields
     private static bool isAlive = true;
@@ -27,23 +36,17 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        UpdateHealthText(health);
         isAlive = true;
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
-        UpdateHealthText(health);
+        OnPlayerDamage?.Invoke(this, new HealthArgs(health));
         if (health <= 0 && isAlive)
         {
             Die();
         }
-    }
-
-    private void UpdateHealthText(float health)
-    {
-        hpText.text = $"HP: {health}";
     }
 
     public void Die()

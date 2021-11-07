@@ -25,11 +25,11 @@ public class PlayerStats
     {
         movementSpeed = new PlayerStat() { name = "moveSpeed", value = 500, maxValue = 1000 };
         drawBackDelay = new PlayerStat() { name = "drawBackDelay", value = 3, maxValue = 0.1f };
-        arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 8, maxValue = 50 };
+        arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 5, maxValue = 55 };
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
-        repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250};
-        coins = 0;
+        repeater = new PlayerStat() { name = "repeater", value = 1, maxValue = 1, cost = 250};
+        coins = 10;
     }
 
     public bool IncrementStat(string statName)
@@ -38,22 +38,22 @@ public class PlayerStats
         switch (statName)
         {
             case "moveSpeed":
-                couldBoy = movementSpeed.Increment(26.4f);
+                couldBoy = movementSpeed.Increment();
                 break;
             case "drawBackDelay":
-                couldBoy = drawBackDelay.Devide(1.2f);
+                couldBoy = drawBackDelay.Devide(1.188f);
                 break;
             case "arrowSpeed":
-                couldBoy = arrowSpeed.Increment(2.25f);
+                couldBoy = arrowSpeed.Increment();
                 break;
             case "flightTimeMax":
-                couldBoy = flightTimeMax.Increment(0.079f);
+                couldBoy = flightTimeMax.Increment();
                 break;
             case "arrowDamage":
-                couldBoy = arrowDamage.Increment(2.6f);
+                couldBoy = arrowDamage.Increment();
                 break;
             case "repeater":
-                couldBoy = repeater.Increment(1);
+                couldBoy = repeater.Increment();
                 break;
             default:
                 Debug.Log("Could not find the stat to increment");

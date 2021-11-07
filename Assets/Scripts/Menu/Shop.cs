@@ -22,6 +22,7 @@ public class Shop : MonoBehaviour
     public TextMeshProUGUI arrowSpeedCost;
     public TextMeshProUGUI flightTimeCost;
     public TextMeshProUGUI damageCost;
+    public TextMeshProUGUI repeaterCost;
 
 
     private void Awake()
@@ -53,11 +54,12 @@ public class Shop : MonoBehaviour
         flightTimeLvl.text = Player.stats.flightTimeMax.level.ToString();
         damageLvl.text = Player.stats.arrowDamage.level.ToString();
         // update cost
-        movementSpeedCost.text = Player.stats.movementSpeed.cost.ToString() + "$";
-        drawBackSpeedCost.text = Player.stats.drawBackDelay.cost.ToString() + "$";
-        arrowSpeedCost.text = Player.stats.arrowSpeed.cost.ToString() + "$";
-        flightTimeCost.text = Player.stats.flightTimeMax.cost.ToString() + "$";
-        damageCost.text = Player.stats.arrowDamage.cost.ToString() + "$";
+        movementSpeedCost.text = Player.stats.movementSpeed.UICost;
+        drawBackSpeedCost.text = Player.stats.drawBackDelay.UICost;
+        arrowSpeedCost.text = Player.stats.arrowSpeed.UICost;
+        flightTimeCost.text = Player.stats.flightTimeMax.UICost;
+        damageCost.text = Player.stats.arrowDamage.UICost;
+        repeaterCost.text = Player.stats.repeater.UICost;
     }
 
     private void PlayerDied(object sender, EventArgs e)
@@ -81,6 +83,7 @@ public class Shop : MonoBehaviour
     {
         shopCanvas.SetActive(true);
         isInShop = true;
+        UpdateText();
     }
 
     private void CloseShop()

@@ -5,22 +5,49 @@ using UnityEngine;
 
 public class PlayerStat
 {
+    // public fields
     public string name;
     public int level;
     public float value;
     public float maxValue;
     public int cost = 5;
-
     public bool maxed = false;
 
-    public bool Increment(float addValue)
+    // private fields
+    private float addValue = 0;
+
+    // propertyes
+    public string UICost
     {
+        get
+        {
+            if (!maxed)
+            {
+                return cost.ToString() + "$";
+
+            }
+            else
+            {
+                return "MAXED!";
+            }
+        }
+    }
+
+
+    public bool Increment()
+    {
+        if (addValue == 0)
+        {
+            addValue = (maxValue - value) / 20;
+        }
+
         if (Player.stats.coins >= cost && !maxed)
         {
+            Player.stats.coins -= cost;
             level++;
             cost += 5;
 
-            if (value + addValue <= maxValue)
+            if (value + addValue < maxValue)
             {
                 value += addValue;
             }
@@ -29,7 +56,6 @@ public class PlayerStat
                 maxed = true;
                 Debug.Log($"{name} MAXED!");
             }
-            Player.stats.coins -= cost;
             return true;
         }
         else
@@ -42,10 +68,11 @@ public class PlayerStat
     {
         if (Player.stats.coins >= cost && !maxed)
         {
+            Player.stats.coins -= cost;
             level++;
             cost += 5;
 
-            if (value / devideValue >= maxValue)
+            if (value / devideValue > maxValue)
             {
                 value /= devideValue;
             }
@@ -54,7 +81,6 @@ public class PlayerStat
                 maxed = true;
                 Debug.Log($"{name} MAXED!");
             }
-            Player.stats.coins -= cost;
             return true;
         }
         else
