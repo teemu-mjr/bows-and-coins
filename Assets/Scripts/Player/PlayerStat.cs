@@ -34,18 +34,22 @@ public class PlayerStat
     }
 
 
-    public bool Increment()
+    public bool Increment(float addValue = 0)
     {
-        if (addValue == 0)
+        if (this.addValue == 0 && addValue == 0)
         {
-            addValue = (maxValue - value) / 20;
+            this.addValue = (maxValue - value) / 20;
+        }
+        else
+        {
+            this.addValue = addValue;
         }
 
         if (Player.stats.coins >= cost && !maxed)
         {
             Player.stats.coins -= cost;
             level++;
-            cost += 5;
+            cost += 4;
 
             if (value + addValue < maxValue)
             {
@@ -70,7 +74,7 @@ public class PlayerStat
         {
             Player.stats.coins -= cost;
             level++;
-            cost += 5;
+            cost += 4;
 
             if (value / devideValue > maxValue)
             {

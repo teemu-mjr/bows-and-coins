@@ -25,6 +25,7 @@ public class ArenaController : MonoBehaviour
     public static DifficultyMultiplyer enemyHealth;
     public static DifficultyMultiplyer enemyArrowSpeed;
     public static DifficultyMultiplyer enemyShotInterval;
+    public static DifficultyMultiplyer huggerSpeed;
     public static DifficultyMultiplyer dasherSpeed;
     public static DifficultyMultiplyer coinDropAmount;
 
@@ -46,10 +47,11 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Action.performed += Action_performed;
 
         waveNumber = 0;
-                
+
         enemyHealth = new DifficultyMultiplyer(1, 0.5f, 30);
         enemyArrowSpeed = new DifficultyMultiplyer(5, 0.125f, 10);
         enemyShotInterval = new DifficultyMultiplyer(3, 0.05f, 0.75f, true);
+        huggerSpeed = new DifficultyMultiplyer(1, 0.2f, 6);
         dasherSpeed = new DifficultyMultiplyer(75, 5, 250);
         coinDropAmount = new DifficultyMultiplyer(1, 1, 20);
     }
@@ -75,7 +77,7 @@ public class ArenaController : MonoBehaviour
         waveNumber++;
         OnNextWave(this, new WaveArgs(waveNumber));
 
-        SpawnEnemies(Mathf.RoundToInt(waveNumber));       
+        SpawnEnemies(Mathf.RoundToInt(waveNumber));
 
         // increment all difficulty multiplyers
         enemyHealth.Increment();
@@ -83,6 +85,7 @@ public class ArenaController : MonoBehaviour
         enemyShotInterval.Increment();
         dasherSpeed.Increment();
         coinDropAmount.Increment();
+        huggerSpeed.Increment();
     }
 
     private void SpawnEnemies(int amount)

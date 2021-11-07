@@ -7,10 +7,19 @@ public class Enemy : MonoBehaviour
     public GameObject target;
     public float startupFreeze = 1f;
     public bool isFrozen = true;
-    public float damage = 1;
     public float knockBackForce = 100;
     public float timeAlive = 0;
 
+    // private fields
+    private float damage = 1;
+
+    public float Damage
+    {
+        get
+        {
+            return damage;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -28,7 +37,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && !isFrozen)
         {
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(Damage);
             collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * knockBackForce, ForceMode.Impulse);
             gameObject.GetComponent<Rigidbody>().AddForce((transform.position - target.transform.position).normalized * knockBackForce, ForceMode.Impulse);
         }

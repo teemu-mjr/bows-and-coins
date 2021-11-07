@@ -5,11 +5,12 @@ using UnityEngine;
 public class Hugger : Enemy
 {
     private float minSpeed = 1f;
-    private float maxSpeed = 5f;
+    private float maxSpeed;
     private float speed;
 
     void Start()
     {
+        maxSpeed = ArenaController.huggerSpeed.Value;
         target = GameObject.FindGameObjectWithTag("Player");
         speed = Random.Range(minSpeed, maxSpeed);
     }

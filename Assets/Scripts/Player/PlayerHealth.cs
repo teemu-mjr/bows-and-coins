@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     // private fields
     private static bool isAlive = true;
-    private float health = 1;
+    private float health = 3;
 
     // Propertyes
     public static bool IsAlive

@@ -20,7 +20,7 @@ public class EnemyArrow : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<PlayerHealth>().TakeDamage(0.5f);
+                other.GetComponent<PlayerHealth>().TakeDamage(1);
             }
             Destroy(gameObject);
         }

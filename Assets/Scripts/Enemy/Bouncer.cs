@@ -67,7 +67,7 @@ public class Bouncer : Enemy
     {
         if (collision.gameObject.tag == "Player" && !isFrozen)
         {
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(Damage);
             collision.gameObject.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position).normalized * knockBackForce, ForceMode.Impulse);
             if (Random.Range(0, 2) == 0)
             {

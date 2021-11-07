@@ -24,7 +24,7 @@ public class GameHUD : MonoBehaviour
     private void GameManager_OnGameStart(object sender, EventArgs e)
     {
         UpdateCoin();
-        UpdateHealth(1);
+        UpdateHealth(3);
         UpdateWave(0);
     }
 

@@ -28,7 +28,7 @@ public class PlayerStats
         arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 5, maxValue = 55 };
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
-        repeater = new PlayerStat() { name = "repeater", value = 1, maxValue = 1, cost = 250};
+        repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250};
         coins = 10;
     }
 
@@ -53,7 +53,7 @@ public class PlayerStats
                 couldBoy = arrowDamage.Increment();
                 break;
             case "repeater":
-                couldBoy = repeater.Increment();
+                couldBoy = repeater.Increment(10);
                 break;
             default:
                 Debug.Log("Could not find the stat to increment");
@@ -74,7 +74,6 @@ public class PlayerStats
         arrowSpeed.cost += amount;
         flightTimeMax.cost += amount;
         arrowDamage.cost += amount;
-        repeater.cost += amount;
     }
 
 

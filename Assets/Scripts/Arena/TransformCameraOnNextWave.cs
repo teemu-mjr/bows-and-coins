@@ -6,6 +6,7 @@ using UnityEngine;
 public class TransformCameraOnNextWave : MonoBehaviour
 {
     public float growAmount;
+    public Vector3 moveAmount;
     private void Start()
     {
         ArenaController.OnNextWave += TransformObject;
@@ -13,7 +14,14 @@ public class TransformCameraOnNextWave : MonoBehaviour
 
     private void TransformObject(object sender, EventArgs e)
     {
-        Camera.main.orthographicSize += growAmount;
+        if(Camera.main.orthographic == true)
+        {
+            Camera.main.orthographicSize += growAmount;
+        }
+        else
+        {
+            Camera.main.transform.position += moveAmount;
+        }
     }
 
     private void OnDestroy()
