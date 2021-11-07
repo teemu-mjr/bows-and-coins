@@ -3,7 +3,7 @@
   <movementSpeed>
     <name>moveSpeed</name>
     <level>0</level>
-    <value>500</value>
+    <value>1000</value>
     <maxValue>1000</maxValue>
     <cost>5</cost>
     <maxed>false</maxed>
@@ -11,7 +11,7 @@
   <drawBackDelay>
     <name>drawBackDelay</name>
     <level>0</level>
-    <value>3</value>
+    <value>0.1</value>
     <maxValue>0.1</maxValue>
     <cost>5</cost>
     <maxed>false</maxed>
@@ -19,7 +19,7 @@
   <arrowSpeed>
     <name>arrowSpeed</name>
     <level>0</level>
-    <value>5</value>
+    <value>40</value>
     <maxValue>55</maxValue>
     <cost>5</cost>
     <maxed>false</maxed>
@@ -27,7 +27,7 @@
   <flightTimeMax>
     <name>flightTimeMax</name>
     <level>0</level>
-    <value>0.5</value>
+    <value>1</value>
     <maxValue>2</maxValue>
     <cost>5</cost>
     <maxed>false</maxed>
@@ -43,10 +43,10 @@
   <repeater>
     <name>repeater</name>
     <level>0</level>
-    <value>1</value>
+    <value>0</value>
     <maxValue>1</maxValue>
     <cost>250</cost>
     <maxed>false</maxed>
   </repeater>
-  <coins>10</coins>
+  <coins>0</coins>
 </PlayerStats>
