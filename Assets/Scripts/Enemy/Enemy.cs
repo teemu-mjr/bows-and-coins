@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // public fields
     public GameObject target;
     public float startupFreeze = 1f;
     public bool isFrozen = true;

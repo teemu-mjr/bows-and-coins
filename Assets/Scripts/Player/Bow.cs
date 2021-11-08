@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 using System;
 
 public class Bow : MonoBehaviour
-{ 
-
+{
+    // public fields
     public GameObject arrow;
-
+    public AudioClip shootAudio;
+    public AudioSource audioSource;
     [HideInInspector] public static float heldBackProcentage = 0;
     [HideInInspector] public static bool isShooting = false;
 
+    // private fields
     private PlayerInputActions playerInputActions;
     private Vector2 shootingVector;
     private float heldBackTime = 0;
@@ -71,6 +73,7 @@ public class Bow : MonoBehaviour
         {
             arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
             Instantiate(arrow, (transform.position + transform.forward * 0.8f), transform.rotation);
+            audioSource.PlayOneShot(shootAudio);
         }
         heldBackTime = 0;
         heldBackProcentage = 0;

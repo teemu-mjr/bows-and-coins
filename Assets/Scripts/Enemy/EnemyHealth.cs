@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    // public fields
     public GameObject itemToDrop;
 
+    public AudioSource audioSource;
+    public AudioClip hitAudio;
+
+    // private fields
     private float health;
     private int dropAmount = 3;
 
@@ -38,11 +43,11 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerArrow"))
         {
+            audioSource.PlayOneShot(hitAudio);
             Arrow arrow = other.gameObject.GetComponent<Arrow>();
             TakeDamage(Player.stats.arrowDamage.value * arrow.heldBackProcentage);
         }

@@ -10,7 +10,7 @@ public class PlayerStat
     public int level;
     public float value;
     public float maxValue;
-    public int cost = 5;
+    public int cost = 2;
     public bool maxed = false;
 
     // private fields

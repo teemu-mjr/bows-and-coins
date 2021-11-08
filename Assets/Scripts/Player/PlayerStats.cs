@@ -29,7 +29,7 @@ public class PlayerStats
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
         repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250};
-        coins = 10;
+        coins = 0;
     }
 
     public bool IncrementStat(string statName)
@@ -61,7 +61,7 @@ public class PlayerStats
         }
         if (couldBoy)
         {
-            IncrementCost(2);
+            IncrementCost(1);
         }
 
         return couldBoy;

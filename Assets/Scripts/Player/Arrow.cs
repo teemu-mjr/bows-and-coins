@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    // public fields
+    public AudioSource audioSource;
+    public AudioClip hitEnemy;
+    public AudioClip hitWall;
+
+    // private fields
     [HideInInspector] public float heldBackProcentage;
 
     private Rigidbody rb;
@@ -37,13 +43,21 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") && !other.CompareTag("PlayerArrow"))
+        if (other.CompareTag("Enemy"))
         {
+            audioSource.PlayOneShot(hitEnemy);
             Destroy(gameObject);
-            if (other.CompareTag("EnemyArrow"))
-            {
-                Destroy(other.gameObject);
-            }
         }
+        else if (other.CompareTag("EnemyArrow"))
+        {
+            audioSource.PlayOneShot(hitWall);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Wall"))
+        {
+            audioSource.PlayOneShot(hitWall);
+            Destroy(gameObject);
+        }
+
     }
 }
