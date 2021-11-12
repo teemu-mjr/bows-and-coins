@@ -2,10 +2,10 @@
 <PlayerStats xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <movementSpeed>
     <name>moveSpeed</name>
-    <level>0</level>
+    <level>2</level>
     <value>500</value>
     <maxValue>1000</maxValue>
-    <cost>6</cost>
+    <cost>16</cost>
     <maxed>false</maxed>
   </movementSpeed>
   <drawBackDelay>
@@ -13,7 +13,7 @@
     <level>2</level>
     <value>2.12563348</value>
     <maxValue>0.1</maxValue>
-    <cost>14</cost>
+    <cost>16</cost>
     <maxed>false</maxed>
   </drawBackDelay>
   <arrowSpeed>
@@ -21,7 +21,7 @@
     <level>1</level>
     <value>5</value>
     <maxValue>55</maxValue>
-    <cost>10</cost>
+    <cost>12</cost>
     <maxed>false</maxed>
   </arrowSpeed>
   <flightTimeMax>
@@ -29,7 +29,7 @@
     <level>0</level>
     <value>0.5</value>
     <maxValue>2</maxValue>
-    <cost>6</cost>
+    <cost>8</cost>
     <maxed>false</maxed>
   </flightTimeMax>
   <arrowDamage>
@@ -37,7 +37,7 @@
     <level>1</level>
     <value>1</value>
     <maxValue>50</maxValue>
-    <cost>10</cost>
+    <cost>12</cost>
     <maxed>false</maxed>
   </arrowDamage>
   <repeater>
