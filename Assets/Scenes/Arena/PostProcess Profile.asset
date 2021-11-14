@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PostProcess Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 5095622496453879995}
---- !u!114 &5095622496453879995
+  - {fileID: 6360046491695440997}
+--- !u!114 &6360046491695440997
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,7 +34,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 1
     min: 0
   scatter:
     m_OverrideState: 1

@@ -73,6 +73,8 @@ public class Bow : MonoBehaviour
         {
             arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
             Instantiate(arrow, (transform.position + transform.forward * 0.8f), transform.rotation);
+            //Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
+            //Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));
             audioSource.PlayOneShot(shootAudio);
         }
         heldBackTime = 0;

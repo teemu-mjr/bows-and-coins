@@ -11,6 +11,7 @@ public class ArenaController : MonoBehaviour
     public List<GameObject> enemies;
     public Vector2 spawnArea;
     public TextMeshProUGUI waveText;
+    public bool spawnEnemies = true;
 
     // events
     public static event EventHandler<WaveArgs> OnNextWave;
@@ -77,7 +78,10 @@ public class ArenaController : MonoBehaviour
         waveNumber++;
         OnNextWave(this, new WaveArgs(waveNumber));
 
-        SpawnEnemies(Mathf.RoundToInt(waveNumber));
+        if (spawnEnemies)
+        {
+            SpawnEnemies(Mathf.RoundToInt(waveNumber));
+        }
 
         // increment all difficulty multiplyers
         enemyHealth.Increment();
