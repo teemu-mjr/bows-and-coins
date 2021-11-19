@@ -18,6 +18,7 @@ public class ArenaController : MonoBehaviour
 
     //private fields
     private int waveNumber;
+    private float cooldownTime;
 
     // player input actions
     PlayerInputActions playerInputActions;
@@ -48,6 +49,7 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Action.performed += Action_performed;
 
         waveNumber = 0;
+        cooldownTime = 1.5f;
 
         enemyHealth = new DifficultyMultiplyer(1, 0.5f, 30);
         enemyArrowSpeed = new DifficultyMultiplyer(5, 0.125f, 10);
@@ -57,10 +59,22 @@ public class ArenaController : MonoBehaviour
         coinDropAmount = new DifficultyMultiplyer(1, 1, 20);
     }
 
+    private void Update()
+    {
+        if (cooldownTime < 0.5f)
+        {
+            cooldownTime += Time.deltaTime;
+        }
+    }
+
     private void Action_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        HandleNextWave();
-        GrowSpawnArea();
+        if (cooldownTime >= 0.5f)
+        {
+            HandleNextWave();
+            TransformSpawnArea();
+            cooldownTime = 0;
+        }
     }
 
     private void OnDrawGizmos()
@@ -68,9 +82,10 @@ public class ArenaController : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(spawnArea.x, 2, spawnArea.y));
     }
 
-    private void GrowSpawnArea()
+    private void TransformSpawnArea()
     {
-        spawnArea += new Vector2(.8f, .45f);
+        transform.position += new Vector3(.8f, 0, .5f);
+        spawnArea += new Vector2(1.6f, 1f);
     }
 
     private void HandleNextWave()
@@ -96,14 +111,15 @@ public class ArenaController : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Vector2 spawnPoint = RandomVector2();
-            Instantiate(enemies[Random.Range(0, enemies.Count)], new Vector3(spawnPoint.x, 2, spawnPoint.y), transform.rotation);
+            Debug.Log(RandomSpawnVector3());
+            Instantiate(enemies[Random.Range(0, enemies.Count)], RandomSpawnVector3(), transform.rotation, transform.GetChild(0));
         }
     }
 
-    private Vector2 RandomVector2()
+    private Vector3 RandomSpawnVector3()
     {
-        return new Vector2(Random.Range(-spawnArea.x / 2, spawnArea.x / 2), Random.Range(-spawnArea.y / 2, spawnArea.y / 2));
+        Vector3 spawnVector = new Vector3(Random.Range(-spawnArea.x / 2, spawnArea.x / 2), -2, Random.Range(-spawnArea.y / 2, spawnArea.y / 2));
+        return transform.position - spawnVector;
     }
 
     private void OnDestroy()
