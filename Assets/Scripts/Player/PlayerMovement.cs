@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
     }
 
     void Update()
@@ -63,5 +62,15 @@ public class PlayerMovement : MonoBehaviour
     {
         var angle = Mathf.Atan2(movementVector.x, movementVector.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.rotation.eulerAngles), Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z), Time.deltaTime * 10);
+    }
+
+    private void OnEnable()
+    {
+        playerInputActions.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInputActions.Player.Disable();
     }
 }

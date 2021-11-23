@@ -17,6 +17,7 @@ public class ArenaController : MonoBehaviour
     public static event EventHandler<WaveArgs> OnNextWave;
 
     //private fields
+    private BoxCollider fallCollider;
     private int waveNumber;
     private float cooldownTime;
 
@@ -47,6 +48,8 @@ public class ArenaController : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Action.performed += Action_performed;
+
+        fallCollider = GetComponent<BoxCollider>();
 
         waveNumber = 0;
         cooldownTime = 1.5f;
@@ -86,6 +89,7 @@ public class ArenaController : MonoBehaviour
     {
         transform.position += new Vector3(.8f, 0, .5f);
         spawnArea += new Vector2(1.6f, 1f);
+        fallCollider.size = new Vector3(spawnArea.x + 20, 1, spawnArea.y + 20);
     }
 
     private void HandleNextWave()
@@ -95,7 +99,7 @@ public class ArenaController : MonoBehaviour
 
         if (spawnEnemies)
         {
-            SpawnEnemies(Mathf.RoundToInt(waveNumber));
+            StartCoroutine(SpawnWithDelay(waveNumber));
         }
 
         // increment all difficulty multiplyers
@@ -105,6 +109,12 @@ public class ArenaController : MonoBehaviour
         dasherSpeed.Increment();
         coinDropAmount.Increment();
         huggerSpeed.Increment();
+    }
+
+    private IEnumerator SpawnWithDelay(int amount)
+    {
+        yield return new WaitForSeconds(0.5f);
+        SpawnEnemies(amount);
     }
 
     private void SpawnEnemies(int amount)
@@ -122,11 +132,20 @@ public class ArenaController : MonoBehaviour
         return transform.position - spawnVector;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (playerInputActions != null)
         {
             playerInputActions.Player.Action.performed -= Action_performed;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerHealth>().Die();
+        }
+        Destroy(other.gameObject);
     }
 }

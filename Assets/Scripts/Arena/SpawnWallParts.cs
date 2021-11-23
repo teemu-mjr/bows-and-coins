@@ -1,18 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnWallParts : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // public fields
+    public GameObject objectToSpawn;
+    public int partAmount;
+    public float spawnGapZ;
+    public float spawnGapX;
+    public Vector3 itemOffset;
+    public Vector3 moveAmount;
+
+    // private fields
+    private Vector3 spawnPosition;
+
+    private void Start()
     {
-        
+        ArenaController.OnNextWave += OnNextWave;
+        spawnPosition = new Vector3((partAmount * spawnGapX) / 2, 0, (partAmount * spawnGapZ) / 2) + itemOffset;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnNextWave(object sender, ArenaController.WaveArgs e)
     {
-        
+        Spawn();
+        partAmount++;
+        transform.position = transform.position + moveAmount;
+    }
+
+    private void Spawn()
+    {
+        Instantiate(objectToSpawn, transform.position + spawnPosition, transform.rotation, transform);
+        spawnPosition += new Vector3(spawnGapX, 0, spawnGapZ);
     }
 }

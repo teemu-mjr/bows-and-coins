@@ -6,8 +6,8 @@ public class SpawnFloorTiles : MonoBehaviour
 {
     // public fields
     public GameObject objectToSpawn;
-    public float tileHeight;
-    public float tileWidth;
+    public float tileCountZ;
+    public float tileCountX;
     public float spawnGapZ;
     public float spawnGapX;
 
@@ -17,26 +17,26 @@ public class SpawnFloorTiles : MonoBehaviour
     private void Start()
     {
         ArenaController.OnNextWave += OnNextWave;
-        spawnPosition = new Vector3((tileWidth * spawnGapX) / 2, 0, (tileHeight * spawnGapZ) / 2);
+        spawnPosition = new Vector3((tileCountX * spawnGapX) / 2, 0, (tileCountZ * spawnGapZ) / 2);
     }
 
     private void OnNextWave(object sender, ArenaController.WaveArgs e)
     {
-        SpawnTiles();
+        Spawn();
     }
 
-    private void SpawnTiles()
+    private void Spawn()
     {
-        for (int i = 0; i < tileHeight; i++)
+        for (int i = 0; i < tileCountZ; i++)
         {
             Instantiate(objectToSpawn, spawnPosition + new Vector3(0, 0, -spawnGapZ * i), transform.rotation, transform);
         }
-        tileHeight++;
-        for (int j = 1; j < tileWidth; j++)
+        tileCountZ++;
+        for (int j = 1; j < tileCountX; j++)
         {
             Instantiate(objectToSpawn, spawnPosition + new Vector3(-spawnGapX * j, 0, 0), transform.rotation, transform);
         }
-        tileWidth++;
+        tileCountX++;
 
         spawnPosition += new Vector3(spawnGapX, 0, spawnGapZ);
     }
