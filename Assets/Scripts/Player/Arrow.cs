@@ -43,17 +43,17 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.GetComponent<Enemy>())
         {
             audioSource.PlayOneShot(hitEnemy);
             Destroy(gameObject);
         }
-        else if (other.CompareTag("EnemyArrow"))
+        else if (other.GetComponent<EnemyArrow>())
         {
             audioSource.PlayOneShot(hitWall);
             Destroy(other.gameObject);
         }
-        else if (other.CompareTag("Wall"))
+        else if (!other.GetComponent<PlayerHealth>())
         {
             audioSource.PlayOneShot(hitWall);
             Destroy(gameObject);

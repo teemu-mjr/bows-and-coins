@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1215886706983619276}
   - component: {fileID: 289153607766674135}
   - component: {fileID: 8201688583467848211}
-  - component: {fileID: 8203964674975226041}
   - component: {fileID: 3095004243357338737}
   m_Layer: 3
   m_Name: TileMesh
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8203964674975226041
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302596171350272729}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3095004243357338737
 Rigidbody:
   m_ObjectHideFlags: 0
