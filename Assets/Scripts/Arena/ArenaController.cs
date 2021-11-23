@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 using Random = UnityEngine.Random;
 
@@ -70,7 +71,7 @@ public class ArenaController : MonoBehaviour
         }
     }
 
-    private void Action_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Action_performed(InputAction.CallbackContext obj)
     {
         if (cooldownTime >= 0.5f)
         {
@@ -121,7 +122,6 @@ public class ArenaController : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Debug.Log(RandomSpawnVector3());
             Instantiate(enemies[Random.Range(0, enemies.Count)], RandomSpawnVector3(), transform.rotation, transform.GetChild(0));
         }
     }

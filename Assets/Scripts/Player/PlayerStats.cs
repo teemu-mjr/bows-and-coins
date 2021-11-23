@@ -13,6 +13,7 @@ public class PlayerStats
     public PlayerStat flightTimeMax;
     public PlayerStat arrowDamage;
     public PlayerStat repeater;
+    public PlayerStat tripleShot;
 
     // public fields
     public int coins;
@@ -29,42 +30,46 @@ public class PlayerStats
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
         repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250};
+        tripleShot = new PlayerStat() { name = "triple", value = 0, maxValue = 1, cost = 1000 };
         coins = 0;
     }
 
     public bool IncrementStat(string statName)
     {
-        bool couldBoy = false;
+        bool couldBuy = false;
         switch (statName)
         {
             case "moveSpeed":
-                couldBoy = movementSpeed.Increment();
+                couldBuy = movementSpeed.Increment();
                 break;
             case "drawBackDelay":
-                couldBoy = drawBackDelay.Devide(1.188f);
+                couldBuy = drawBackDelay.Devide(1.188f);
                 break;
             case "arrowSpeed":
-                couldBoy = arrowSpeed.Increment();
+                couldBuy = arrowSpeed.Increment();
                 break;
             case "flightTimeMax":
-                couldBoy = flightTimeMax.Increment();
+                couldBuy = flightTimeMax.Increment();
                 break;
             case "arrowDamage":
-                couldBoy = arrowDamage.Increment();
+                couldBuy = arrowDamage.Increment();
                 break;
             case "repeater":
-                couldBoy = repeater.Increment(10);
+                couldBuy = repeater.Increment(10);
+                break;
+            case "triple":
+                couldBuy = tripleShot.Increment(10);
                 break;
             default:
                 Debug.Log("Could not find the stat to increment");
                 return false;
         }
-        if (couldBoy)
+        if (couldBuy)
         {
             IncrementCost(1);
         }
 
-        return couldBoy;
+        return couldBuy;
     }
 
     private void IncrementCost(int amount)

@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpawnWallParts : MonoBehaviour
 {
     // public fields
+    public BoxCollider wallCollider;
     public GameObject objectToSpawn;
     public int partAmount;
     public float spawnGapZ;
@@ -24,6 +25,7 @@ public class SpawnWallParts : MonoBehaviour
 
     private void OnNextWave(object sender, ArenaController.WaveArgs e)
     {
+        collider.size += new Vector3(spawnGapX, 0, spawnGapZ);
         Spawn();
         partAmount++;
         transform.position = transform.position + moveAmount;
