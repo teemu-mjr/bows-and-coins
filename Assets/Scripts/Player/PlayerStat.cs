@@ -45,9 +45,9 @@ public class PlayerStat
             this.addValue = addValue;
         }
 
-        if (Player.stats.coins >= cost && !maxed)
+        if (Player.stats.Coins >= cost && !maxed)
         {
-            Player.stats.coins -= cost;
+            Player.stats.RemoveCoins(cost);
             level++;
             cost += 4;
 
@@ -70,9 +70,9 @@ public class PlayerStat
 
     public bool Devide(float devideValue)
     {
-        if (Player.stats.coins >= cost && !maxed)
+        if (Player.stats.Coins >= cost && !maxed)
         {
-            Player.stats.coins -= cost;
+            Player.stats.RemoveCoins(cost);
             level++;
             cost += 4;
 

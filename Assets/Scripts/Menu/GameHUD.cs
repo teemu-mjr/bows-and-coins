@@ -13,13 +13,17 @@ public class GameHUD : MonoBehaviour
     void OnEnable()
     {
         // subscriptions
-        Coin.OnCoinPickup += Coin_OnCoinPickup;
+        PlayerStats.OnCoinChange += PlayerStats_OnCoinChange;
         PlayerHealth.OnPlayerDamage += PlayerHealth_OnPlayerDamage;
         ArenaController.OnNextWave += ArenaController_OnNextWave;
 
         GameManager.OnGameStart += GameManager_OnGameStart;
     }
 
+    private void PlayerStats_OnCoinChange(object sender, CoinEventArgs e)
+    {
+        UpdateCoin();
+    }
 
     private void GameManager_OnGameStart(object sender, EventArgs e)
     {
@@ -28,17 +32,12 @@ public class GameHUD : MonoBehaviour
         UpdateWave(0);
     }
 
-    private void Coin_OnCoinPickup(object sender, EventArgs e)
-    {
-        UpdateCoin();
-    }
-
     private void UpdateCoin()
     {
-        coinText.text = Player.stats.coins.ToString() + "$";
+        coinText.text = Player.stats.Coins.ToString() + "$";
     }
 
-    private void PlayerHealth_OnPlayerDamage(object sender, PlayerHealth.HealthArgs e)
+    private void PlayerHealth_OnPlayerDamage(object sender, PlayerHealthArgs e)
     {
         UpdateHealth(e.health);
     }
@@ -61,7 +60,7 @@ public class GameHUD : MonoBehaviour
     private void OnDisable()
     {
         // unsubscribes
-        Coin.OnCoinPickup -= Coin_OnCoinPickup;
+        PlayerStats.OnCoinChange -= PlayerStats_OnCoinChange;
         PlayerHealth.OnPlayerDamage -= PlayerHealth_OnPlayerDamage;
         ArenaController.OnNextWave -= ArenaController_OnNextWave;
 

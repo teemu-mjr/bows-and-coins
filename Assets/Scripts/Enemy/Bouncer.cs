@@ -51,18 +51,6 @@ public class Bouncer : Enemy
         Instantiate(arrow, transform.position, firePoint.rotation);
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.tag == "TriggerZ")
-        {
-            speedY *= -1;
-        }
-        if (collider.tag == "TriggerX")
-        {
-            speedX *= -1;
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player" && !isFrozen)
@@ -77,6 +65,14 @@ public class Bouncer : Enemy
             {
                 speedY *= -1;
             }
+        }
+        if (collision.gameObject.CompareTag("TriggerZ"))
+        {
+            speedY *= -1;
+        }
+        else if (collision.gameObject.CompareTag("TriggerX"))
+        {
+            speedX *= -1;
         }
         if (collision.gameObject.tag == "Enemy")
         {

@@ -12,12 +12,15 @@ public class EnemyHealth : MonoBehaviour
 
     // private fields
     private float health;
-    private int dropAmount = 3;
+    private int dropAmount;
+    private Transform coinTransform;
 
     private void Start()
     {
         health = ArenaController.enemyHealth.Value;
         dropAmount = Mathf.RoundToInt(ArenaController.coinDropAmount.Value);
+        itemToDrop.GetComponent<Coin>().coinValue = Mathf.RoundToInt(ArenaController.coinValue.Value);
+        coinTransform = GameObject.Find("Coins").transform;
     }
 
     public void TakeDamage(float damage)
@@ -37,9 +40,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void DropItem()
     {
-        for(int i = 0; i < dropAmount; i++)
+        for (int i = 0; i < dropAmount; i++)
         {
-            Instantiate(itemToDrop, transform.position, transform.rotation);
+            Instantiate(itemToDrop, transform.position, transform.rotation, coinTransform);
         }
     }
 

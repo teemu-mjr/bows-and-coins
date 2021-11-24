@@ -32,6 +32,7 @@ public class ArenaController : MonoBehaviour
     public static DifficultyMultiplyer huggerSpeed;
     public static DifficultyMultiplyer dasherSpeed;
     public static DifficultyMultiplyer coinDropAmount;
+    public static DifficultyMultiplyer coinValue;
 
     // WaveArgs
     public class WaveArgs : EventArgs
@@ -60,7 +61,8 @@ public class ArenaController : MonoBehaviour
         enemyShotInterval = new DifficultyMultiplyer(3, 0.05f, 0.75f, true);
         huggerSpeed = new DifficultyMultiplyer(1, 0.2f, 6);
         dasherSpeed = new DifficultyMultiplyer(75, 5, 250);
-        coinDropAmount = new DifficultyMultiplyer(1, 1, 20);
+        coinDropAmount = new DifficultyMultiplyer(1, 0.5f, 20);
+        coinValue = new DifficultyMultiplyer(1, 1, 20);
     }
 
     private void Update()
@@ -108,8 +110,9 @@ public class ArenaController : MonoBehaviour
         enemyArrowSpeed.Increment();
         enemyShotInterval.Increment();
         dasherSpeed.Increment();
-        coinDropAmount.Increment();
         huggerSpeed.Increment();
+        coinDropAmount.Increment();
+        coinValue.Increment();
     }
 
     private IEnumerator SpawnWithDelay(int amount)

@@ -28,12 +28,16 @@ public class EnemyArrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<EnemyArrow>() && !GetComponent<Enemy>())
+        if (!other.GetComponent<EnemyArrow>() || !GetComponent<Enemy>())
         {
             if (other.GetComponent<PlayerHealth>())
             {
                 other.GetComponent<PlayerHealth>().TakeDamage(1);
+                Destroy(gameObject);
             }
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }

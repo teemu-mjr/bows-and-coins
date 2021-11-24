@@ -15,8 +15,14 @@ public class PlayerStats
     public PlayerStat repeater;
     public PlayerStat tripleShot;
 
-    // public fields
-    public int coins;
+    // private fields
+    private int coins;
+
+    // props
+    public int Coins { get { return coins; } }
+
+    // events
+    public static event EventHandler<CoinEventArgs> OnCoinChange;
 
     /// <summary>
     /// Default constructor
@@ -26,11 +32,33 @@ public class PlayerStats
     {
         movementSpeed = new PlayerStat() { name = "moveSpeed", value = 500, maxValue = 1000 };
         drawBackDelay = new PlayerStat() { name = "drawBackDelay", value = 3, maxValue = 0.1f };
-        arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 5, maxValue = 55 };
+        arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 15, maxValue = 55 };
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
-        arrowDamage = new PlayerStat() { name = "arrowDamage", value = 1, maxValue = 50 };
-        repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250};
+        arrowDamage = new PlayerStat() { name = "arrowDamage", value = 2, maxValue = 50 };
+        repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250 };
         tripleShot = new PlayerStat() { name = "triple", value = 0, maxValue = 1, cost = 1000 };
+        coins = 0;
+
+    }
+
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+        OnCoinChange?.Invoke(this, new CoinEventArgs() { value = amount });
+    }
+
+    public void RemoveCoins(int amount)
+    {
+        if (coins - amount >= 0)
+        {
+            coins -= amount;
+            OnCoinChange?.Invoke(this, new CoinEventArgs() { value = -amount });
+        }
+    }
+
+    public void ResetCoins()
+    {
+        OnCoinChange?.Invoke(this, new CoinEventArgs() { value = -coins });
         coins = 0;
     }
 
@@ -66,7 +94,7 @@ public class PlayerStats
         }
         if (couldBuy)
         {
-            IncrementCost(1);
+            IncrementCost(2);
         }
 
         return couldBuy;
@@ -82,4 +110,4 @@ public class PlayerStats
     }
 
 
-}   
+}

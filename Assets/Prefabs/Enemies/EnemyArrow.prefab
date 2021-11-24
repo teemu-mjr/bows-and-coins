@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  flightTimeMax: 1
 --- !u!1001 &3804559655137243926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,10 +139,18 @@ PrefabInstance:
     - target: {fileID: -4157524182732408741, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 66884dfe78f20e043933980bee3ab04b, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: -4157524182732408741, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -914332758332951627, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
+      propertyPath: m_TagString
+      value: EnemyArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: -259972160606440404, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
+      propertyPath: m_TagString
+      value: EnemyArrow
       objectReference: {fileID: 0}
     - target: {fileID: 135152979187154827, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_LocalScale.y
@@ -150,6 +159,10 @@ PrefabInstance:
     - target: {fileID: 135152979187154827, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536378539995834914, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
+      propertyPath: m_TagString
+      value: EnemyArrow
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Name

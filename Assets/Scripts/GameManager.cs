@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int sceneIndex)
     {
         // TODO: Reset money / open the shop better
-        Player.stats.coins = 0;
+        Player.stats.ResetCoins();
         player.SavePlayer();
 
         SceneManager.LoadScene(sceneIndex);

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    // public fields
+    public int coinValue;
+
     // private fields
     private Rigidbody rb;
 
     // events
-    public static event System.EventHandler OnCoinPickup;
+    //public static event System.EventHandler<CoinEventArgs> OnCoinPickup;
 
 
     // Start is called before the first frame update
@@ -36,8 +39,8 @@ public class Coin : MonoBehaviour
         }
         if (other.CompareTag("Player"))
         {;
-            Player.stats.coins++;
-            OnCoinPickup?.Invoke(this, System.EventArgs.Empty);
+            Player.stats.AddCoins(coinValue);
+            //OnCoinPickup?.Invoke(this, new CoinEventArgs() { value = coinValue});
             Destroy(gameObject);
         }
     }

@@ -7,23 +7,12 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     // events
-    public static event EventHandler<HealthArgs> OnPlayerDamage;
+    public static event EventHandler<PlayerHealthArgs> OnPlayerDamage;
     public static event EventHandler OnPlayerDeath;
-
-    // HealthArgs
-    public class HealthArgs : EventArgs
-    {
-        public float health;
-
-        public HealthArgs(float health)
-        {
-            this.health = health;
-        }
-    }
 
     // private fields
     private static bool isAlive = true;
-    private float health = 3;
+    private int health = 3;
 
     // Propertyes
     public static bool IsAlive
@@ -41,8 +30,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        OnPlayerDamage?.Invoke(this, new HealthArgs(health));
+        health -= Mathf.RoundToInt(damage);
+        OnPlayerDamage?.Invoke(this, new PlayerHealthArgs() { health = this.health});
         if (health <= 0 && isAlive)
         {
             Die();
