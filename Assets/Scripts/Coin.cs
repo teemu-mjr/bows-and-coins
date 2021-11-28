@@ -10,15 +10,11 @@ public class Coin : MonoBehaviour
     // private fields
     private Rigidbody rb;
 
-    // events
-    //public static event System.EventHandler<CoinEventArgs> OnCoinPickup;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(RandomVector3(-4, 4), ForceMode.Impulse);
+        rb.AddForce(RandomVector3(-2, 2), ForceMode.Impulse);
         rb.AddTorque(RandomVector3(-1000, 10000), ForceMode.Impulse);
     }
 
@@ -33,15 +29,14 @@ public class Coin : MonoBehaviour
         {
             rb.isKinematic = true;
         }
-        if (other.CompareTag("Wall"))
+        if (other.CompareTag("Player"))
+        {
+            Player.stats.AddCoins(coinValue);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Enemy"))
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        }
-        if (other.CompareTag("Player"))
-        {;
-            Player.stats.AddCoins(coinValue);
-            //OnCoinPickup?.Invoke(this, new CoinEventArgs() { value = coinValue});
-            Destroy(gameObject);
         }
     }
 }

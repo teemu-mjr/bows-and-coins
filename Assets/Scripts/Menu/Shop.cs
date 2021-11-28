@@ -11,12 +11,14 @@ public class Shop : MonoBehaviour
     public GameObject shopCanvas;
     public TextMeshProUGUI shopCoinText;
 
+    // level texts
     public TextMeshProUGUI movementSpeedLvl;
     public TextMeshProUGUI drawBackSpeedLvl;
     public TextMeshProUGUI arrowSpeedLvl;
     public TextMeshProUGUI flightTimeLvl;
     public TextMeshProUGUI damageLvl;
 
+    // cost texts
     public TextMeshProUGUI movementSpeedCost;
     public TextMeshProUGUI drawBackSpeedCost;
     public TextMeshProUGUI arrowSpeedCost;
@@ -24,6 +26,10 @@ public class Shop : MonoBehaviour
     public TextMeshProUGUI damageCost;
     public TextMeshProUGUI repeaterCost;
     public TextMeshProUGUI tripleCost;
+
+    // toggle buttons
+    public GameObject repeaterToggle;
+    public GameObject tripleToggle;
 
 
     private void Awake()
@@ -40,6 +46,33 @@ public class Shop : MonoBehaviour
         else
         {
             Debug.Log("FAIL");
+        }
+        UpdateText();
+    }
+
+    public void ToggleStat(string statName)
+    {
+        if (statName == "repeater")
+        {
+            if (Player.stats.repeater.inUse)
+            {
+                Player.stats.repeater.inUse = false;
+            }
+            else
+            {
+                Player.stats.repeater.inUse = true;
+            }           
+        }
+        if (statName == "triple")
+        {
+            if (Player.stats.tripleShot.inUse)
+            {
+                Player.stats.tripleShot.inUse = false;
+            }
+            else
+            {
+                Player.stats.tripleShot.inUse = true;
+            }
         }
         UpdateText();
     }
@@ -62,10 +95,36 @@ public class Shop : MonoBehaviour
         damageCost.text = Player.stats.arrowDamage.UICost;
         repeaterCost.text = Player.stats.repeater.UICost;
         tripleCost.text = Player.stats.tripleShot.UICost;
+        // update toggle buttons
+        repeaterToggle.GetComponentInChildren<TextMeshProUGUI>().text = Player.stats.repeater.UIToggle;
+        tripleToggle.GetComponentInChildren<TextMeshProUGUI>().text = Player.stats.tripleShot.UIToggle;
+
+        if (Player.stats.repeater.maxed)
+        {
+            repeaterToggle.SetActive(true);
+        }
+        else
+        {
+            repeaterToggle.SetActive(false);
+        }
+        if (Player.stats.tripleShot.maxed)
+        {
+            tripleToggle.SetActive(true);
+        }
+        else
+        {
+            tripleToggle.SetActive(false);
+        }
     }
 
     private void PlayerDied(object sender, EventArgs e)
     {
+        StartCoroutine(HandleWithDelay());
+    }
+
+    private IEnumerator HandleWithDelay()
+    {
+        yield return new WaitForSeconds(2);
         HandleShop();
     }
 

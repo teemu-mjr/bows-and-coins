@@ -6,9 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     // public fields
     public GameObject itemToDrop;
-
-    public AudioSource audioSource;
-    public AudioClip hitAudio;
+    public GameObject heathBar;
 
     // private fields
     private float health;
@@ -26,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        heathBar.GetComponent<HeathBar>().UpdateBar(health / ArenaController.enemyHealth.Value);
         if (health <= 0)
         {
             Die();
@@ -50,7 +49,6 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.CompareTag("PlayerArrow"))
         {
-            audioSource.PlayOneShot(hitAudio);
             Arrow arrow = other.gameObject.GetComponent<Arrow>();
             TakeDamage(Player.stats.arrowDamage.value * arrow.heldBackProcentage);
         }

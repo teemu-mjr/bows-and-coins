@@ -36,8 +36,8 @@ public class PlayerStats
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 2, maxValue = 50 };
         repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250 };
-        tripleShot = new PlayerStat() { name = "triple", value = 0, maxValue = 1, cost = 1000 };
-        coins = 0;
+        tripleShot = new PlayerStat() { name = "triple", value = 0, maxValue = 1, cost = 1500 };
+        coins = 100000;
 
     }
 
@@ -94,7 +94,7 @@ public class PlayerStats
         }
         if (couldBuy)
         {
-            IncrementCost(2);
+            IncrementCost(5);
         }
 
         return couldBuy;

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         // creating player input actions
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -27,13 +30,6 @@ public class GameManager : MonoBehaviour
         // subscriptions
         playerInputActions.Player.Reset.performed += PlayerLoadScene_performed;
         PlayerHealth.OnPlayerDeath += OnPlayerDeath;
-    }
-
-    private void Start()
-    {
-        Screen.SetResolution(1920, 1080, false);
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
 
         // creating the only player instance of the game
         player = new Player();
@@ -58,9 +54,7 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeath(object sender, EventArgs e)
     {
         playerInputActions.Player.Disable();
-        Time.timeScale = 0;
         player.SavePlayer();
-        shop.OpenShop();
     }
 
     private void OnDisable()

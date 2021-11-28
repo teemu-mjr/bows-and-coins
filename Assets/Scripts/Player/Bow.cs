@@ -1,15 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
 
 public class Bow : MonoBehaviour
 {
     // public fields
     public GameObject arrow;
-    public AudioClip shootAudio;
-    public AudioSource audioSource;
+    public Vector3 shootOffset;
     public PowerBar powerBar;
     [HideInInspector] public static float heldBackProcentage = 0;
     [HideInInspector] public static bool isShooting = false;
@@ -18,6 +17,9 @@ public class Bow : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Vector2 shootingVector;
     private float heldBackTime = 0;
+
+    // events
+    public static event EventHandler OnShoot;
 
     private void Awake()
     {
@@ -56,7 +58,7 @@ public class Bow : MonoBehaviour
         }
 
         RotatePlayerWithInputVector(shootingVector);
-        if (Player.stats.repeater.value == 1 && heldBackProcentage >= 1)
+        if (Player.stats.repeater.maxed && Player.stats.repeater.inUse && heldBackProcentage >= 1)
         {
             Shoot();
         }
@@ -72,13 +74,13 @@ public class Bow : MonoBehaviour
         if (heldBackTime / Player.stats.drawBackDelay.value > 0.2f)
         {
             arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
-            Instantiate(arrow, (transform.position + transform.forward * 0.8f), transform.rotation);
+            Instantiate(arrow, (transform.position + transform.forward * 0.8f + shootOffset), transform.rotation);
             if (Player.stats.tripleShot.maxed)
             {
-                Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
-                Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));
+                Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
+                Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));
             }
-            audioSource.PlayOneShot(shootAudio);
+            OnShoot?.Invoke(this, EventArgs.Empty);
         }
         heldBackTime = 0;
         heldBackProcentage = 0;
@@ -92,16 +94,22 @@ public class Bow : MonoBehaviour
     private void OnEnable()
     {
         playerInputActions.Player.Enable();
-        // subsccriptions
+        // subscriptions
         playerInputActions.Player.Fire.performed += FirePerformed;
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+    }
+
+    private void PlayerHealth_OnPlayerDeath(object sender, EventArgs e)
+    {
+        this.enabled = false;
     }
 
     private void OnDisable()
     {
+        playerInputActions.Player.Disable();
         // Remove subscriptions
         playerInputActions.Player.Fire.performed -= FirePerformed;
-
-        playerInputActions.Player.Disable();
+        PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
     }
 
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     // public fields
-    public AudioSource audioSource;
     public AudioClip hitEnemy;
     public AudioClip hitWall;
 
@@ -43,19 +42,16 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Enemy>())
+        if (other.transform.root.GetComponent<Enemy>())
         {
-            audioSource.PlayOneShot(hitEnemy);
             Destroy(gameObject);
         }
-        else if (other.GetComponent<EnemyArrow>())
+        else if (other.transform.root.GetComponent<EnemyArrow>())
         {
-            audioSource.PlayOneShot(hitWall);
             Destroy(other.gameObject);
         }
-        else if (!other.GetComponent<PlayerHealth>())
+        else if (!other.transform.root.GetComponent<PlayerHealth>())
         {
-            audioSource.PlayOneShot(hitWall);
             Destroy(gameObject);
         }
 

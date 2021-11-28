@@ -12,9 +12,8 @@ public class PlayerStat
     public float maxValue;
     public int cost = 2;
     public bool maxed = false;
-
-    // private fields
-    private float addValue = 0;
+    public bool inUse = true;
+    public float addValue = 0;
 
     // propertyes
     public string UICost
@@ -33,14 +32,30 @@ public class PlayerStat
         }
     }
 
+    public string UIToggle
+    {
+        get
+        {
+            if (inUse)
+            {
+                return "ON";
+            }
+            else
+            {
+                return "OFF";
+            }
+        }
+    }
+
 
     public bool Increment(float addValue = 0)
     {
-        if (this.addValue == 0 && addValue == 0)
+        if (addValue == 0 && this.addValue == 0)
         {
             this.addValue = (maxValue - value) / 20;
+            Debug.Log("addvalue: " + this.addValue);
         }
-        else
+        else if (addValue != 0)
         {
             this.addValue = addValue;
         }
@@ -51,9 +66,9 @@ public class PlayerStat
             level++;
             cost += 4;
 
-            if (value + addValue < maxValue)
+            if (value + this.addValue < maxValue)
             {
-                value += addValue;
+                value += this.addValue;
             }
             else
             {

@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // public fields
+    [HideInInspector] public Vector2 movementVector;
+
     // private field
     private PlayerInputActions playerInputActions;
-    private Vector2 movementVector;
     private Rigidbody rb;
+
 
     private void Start()
     {
@@ -68,10 +71,18 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerInputActions.Player.Enable();
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+    }
+
+    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
+    {
+        this.enabled = false;
+        rb.AddForce(Vector3.up * 100, ForceMode.Impulse);
     }
 
     private void OnDisable()
     {
         playerInputActions.Player.Disable();
+        PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
     }
 }

@@ -45,4 +45,14 @@ public class Dasher : Enemy
         yield return new WaitForSeconds(dashDelay);
         rb.AddForce(playerDirection.normalized * speed, ForceMode.Impulse);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && !isFrozen)
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(Damage);
+            Vector3 targetVector = new Vector3(target.transform.position.x, 0, target.transform.position.z);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce((targetVector - new Vector3(transform.position.x, 0, transform.position.z)).normalized * knockBackForce, ForceMode.Impulse);
+        }
+    }
 }

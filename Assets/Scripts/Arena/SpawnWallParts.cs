@@ -45,12 +45,19 @@ public class SpawnWallParts : MonoBehaviour
         }
         Spawn();
         partAmount++;
-        MoveWall();
+        StartCoroutine(MoveWall());
     }
 
-    private void MoveWall()
+    private IEnumerator MoveWall()
     {
-        transform.position = targetVector;
+        float timeElapsed = 0;
+
+        while (transform.position != targetVector)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetVector, timeElapsed / 3);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private void Spawn()

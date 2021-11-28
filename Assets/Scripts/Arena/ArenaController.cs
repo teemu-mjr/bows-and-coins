@@ -14,13 +14,13 @@ public class ArenaController : MonoBehaviour
     public TextMeshProUGUI waveText;
     public bool spawnEnemies = true;
 
-    // events
-    public static event EventHandler<WaveArgs> OnNextWave;
-
     //private fields
     private BoxCollider fallCollider;
     private int waveNumber;
-    private float cooldownTime;
+    private bool canSpawn;
+
+    // events
+    public static event EventHandler<WaveArgs> OnNextWave;
 
     // player input actions
     PlayerInputActions playerInputActions;
@@ -45,18 +45,18 @@ public class ArenaController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
     {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Action.performed += Action_performed;
-
+        SpawnFloorTiles.OnReady += SpawnFloorTiles_OnReady;
         fallCollider = GetComponent<BoxCollider>();
 
         waveNumber = 0;
-        cooldownTime = 1.5f;
+        canSpawn = true;
 
-        enemyHealth = new DifficultyMultiplyer(1, 0.5f, 30);
+        enemyHealth = new DifficultyMultiplyer(1, 2f, 100);
         enemyArrowSpeed = new DifficultyMultiplyer(5, 0.125f, 10);
         enemyShotInterval = new DifficultyMultiplyer(3, 0.05f, 0.75f, true);
         huggerSpeed = new DifficultyMultiplyer(1, 0.2f, 6);
@@ -65,21 +65,19 @@ public class ArenaController : MonoBehaviour
         coinValue = new DifficultyMultiplyer(1, 1, 20);
     }
 
-    private void Update()
+    void OnEnable()
     {
-        if (cooldownTime < 0.5f)
-        {
-            cooldownTime += Time.deltaTime;
-        }
     }
+
+
 
     private void Action_performed(InputAction.CallbackContext obj)
     {
-        if (cooldownTime >= 0.5f)
+        if (canSpawn)
         {
             HandleNextWave();
             TransformSpawnArea();
-            cooldownTime = 0;
+            canSpawn = false;
         }
     }
 
@@ -100,11 +98,6 @@ public class ArenaController : MonoBehaviour
         waveNumber++;
         OnNextWave(this, new WaveArgs(waveNumber));
 
-        if (spawnEnemies)
-        {
-            StartCoroutine(SpawnWithDelay(waveNumber));
-        }
-
         // increment all difficulty multiplyers
         enemyHealth.Increment();
         enemyArrowSpeed.Increment();
@@ -114,10 +107,17 @@ public class ArenaController : MonoBehaviour
         coinDropAmount.Increment();
         coinValue.Increment();
     }
-
-    private IEnumerator SpawnWithDelay(int amount)
+    private void SpawnFloorTiles_OnReady(object sender, EventArgs e)
     {
-        yield return new WaitForSeconds(0.5f);
+        if (spawnEnemies)
+        {
+            SpawnWithDelay(waveNumber);
+        }
+        canSpawn = true;
+    }
+
+    private void SpawnWithDelay(int amount)
+    {
         SpawnEnemies(amount);
     }
 
@@ -137,10 +137,9 @@ public class ArenaController : MonoBehaviour
 
     private void OnDisable()
     {
-        if (playerInputActions != null)
-        {
-            playerInputActions.Player.Action.performed -= Action_performed;
-        }
+        playerInputActions.Player.Disable();
+        playerInputActions.Player.Action.performed -= Action_performed;
+        SpawnFloorTiles.OnReady -= SpawnFloorTiles_OnReady;
     }
 
     private void OnTriggerEnter(Collider other)
