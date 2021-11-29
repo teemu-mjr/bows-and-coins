@@ -25,7 +25,6 @@ public class Hugger : Enemy
 
     private void FixedUpdate()
     {
-        Debug.Log(attackCooldown);
         if (!isFrozen)
         {
             FollowPlayer();

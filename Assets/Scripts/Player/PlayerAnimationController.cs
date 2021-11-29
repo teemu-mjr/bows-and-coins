@@ -22,12 +22,14 @@ public class PlayerAnimationController : MonoBehaviour
     private void Start()
     {
         animator.SetFloat("DrawSpeed", 1 / Player.stats.drawBackDelay.value);
-        
     }
 
     private void FixedUpdate()
     {
-        animator.SetFloat("MoveVector", playerMovement.movementVector.magnitude);
+        animator.SetFloat("MoveMagnitude", playerMovement.movementVector.magnitude);
+
+        animator.SetFloat("DirectionVectorX", transform.InverseTransformDirection(rb.velocity).normalized.x);
+        animator.SetFloat("DirectionVectorY", transform.InverseTransformDirection(rb.velocity).normalized.z);
 
         animator.SetFloat("MoveSpeed", rb.velocity.magnitude / 3.75f);
 
@@ -46,7 +48,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void Bow_OnShoot(object sender, System.EventArgs e)
     {
         animator.SetTrigger("Shoot");
-        isDrawn = false;
     }
     private void OnDisable()
     {

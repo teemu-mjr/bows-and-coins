@@ -9,7 +9,7 @@ public class CollectCoins : MonoBehaviour
         ArenaController.OnNextWave += ArenaController_OnNextWave;
     }
 
-    private void ArenaController_OnNextWave(object sender, ArenaController.WaveArgs e)
+    private void ArenaController_OnNextWave(object sender, WaveEventArgs e)
     {
         int totalValue = 0;
         for (int i = 0; i < transform.childCount; i++)

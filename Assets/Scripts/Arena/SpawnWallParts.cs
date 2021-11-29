@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnWallParts : MonoBehaviour
 {
     // public fields
-    public GameObject objectToSpawn;
+    public List<GameObject> objectsToSpawn;
     public int partAmount;
     public float spawnGapZ;
     public float spawnGapX;
@@ -19,6 +19,7 @@ public class SpawnWallParts : MonoBehaviour
     private Vector3 spawnPosition;
     private BoxCollider wallCollider;
     private Vector3 targetVector;
+    private int spawnObjectIndex;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class SpawnWallParts : MonoBehaviour
         ArenaController.OnNextWave += OnNextWave;
     }
 
-    private void OnNextWave(object sender, ArenaController.WaveArgs e)
+    private void OnNextWave(object sender, WaveEventArgs e)
     {
         targetVector = transform.position + moveAmount;
         wallCollider.size += new Vector3((spawnGapX + spawnGapZ), 0, 0);
@@ -62,8 +63,17 @@ public class SpawnWallParts : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(objectToSpawn, transform.position + spawnPosition, transform.rotation, transform);
+        Instantiate(objectsToSpawn[spawnObjectIndex], transform.position + spawnPosition, transform.rotation, transform);
         spawnPosition += new Vector3(spawnGapX, 0, spawnGapZ);
+
+        if(spawnObjectIndex < objectsToSpawn.Count - 1)
+        {
+            spawnObjectIndex++;
+        }
+        else
+        {
+            spawnObjectIndex = 0;
+        }
     }
 
     private void OnDisable()

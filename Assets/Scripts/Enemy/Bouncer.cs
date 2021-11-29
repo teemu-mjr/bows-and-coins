@@ -47,7 +47,7 @@ public class Bouncer : Enemy
 
     private void ShootArrow()
     {
-        firePoint.LookAt(target.transform.position);
+        firePoint.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
         Instantiate(arrow, transform.position, firePoint.rotation);
     }
 

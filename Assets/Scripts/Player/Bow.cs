@@ -71,11 +71,11 @@ public class Bow : MonoBehaviour
 
     private void Shoot()
     {
-        if (heldBackTime / Player.stats.drawBackDelay.value > 0.2f)
+        if (heldBackTime / Player.stats.drawBackDelay.value > 0.4f)
         {
             arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
             Instantiate(arrow, (transform.position + transform.forward * 0.8f + shootOffset), transform.rotation);
-            if (Player.stats.tripleShot.maxed)
+            if (Player.stats.tripleShot.inUse)
             {
                 Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
                 Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));

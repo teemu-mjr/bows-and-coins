@@ -13,7 +13,7 @@ public class TransformOnNextWave : MonoBehaviour
         ArenaController.OnNextWave += TransformObject;
     }
 
-    private void TransformObject(object sender, EventArgs e)
+    private void TransformObject(object sender, WaveEventArgs e)
     {
         transform.position += positionToAdd;
         transform.localScale += scaleToAdd;

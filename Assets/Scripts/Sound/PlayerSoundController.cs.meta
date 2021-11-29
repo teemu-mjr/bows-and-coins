@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bbf180ea1c4ceae4ba27d50d211144bf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerShoot: {fileID: 8300000, guid: 0d8e79a603825ca4cbc6823f02df5e18, type: 3}
+  - playerHit: {instanceID: 0}
+  - enemyHit: {fileID: 8300000, guid: 2d623649bcf2f3e4cbf81e0af8d187d5, type: 3}
+  - wallHit: {fileID: 8300000, guid: 6f525ec88fca41549a6f3b694395b2f1, type: 3}
+  - enemySpawn: {instanceID: 0}
+  - coinPickup: {fileID: 8300000, guid: 6f525ec88fca41549a6f3b694395b2f1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

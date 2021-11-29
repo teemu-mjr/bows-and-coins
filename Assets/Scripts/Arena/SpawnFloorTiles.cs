@@ -26,7 +26,7 @@ public class SpawnFloorTiles : MonoBehaviour
         wallCollider = GetComponent<BoxCollider>();
     }
 
-    private void OnNextWave(object sender, ArenaController.WaveArgs e)
+    private void OnNextWave(object sender, WaveEventArgs e)
     {
         StartCoroutine(SpawnTiles());
         wallCollider.size += new Vector3(spawnGapX, 0, spawnGapZ);

@@ -20,7 +20,7 @@ public class ArenaController : MonoBehaviour
     private bool canSpawn;
 
     // events
-    public static event EventHandler<WaveArgs> OnNextWave;
+    public static event EventHandler<WaveEventArgs> OnNextWave;
 
     // player input actions
     PlayerInputActions playerInputActions;
@@ -33,17 +33,6 @@ public class ArenaController : MonoBehaviour
     public static DifficultyMultiplyer dasherSpeed;
     public static DifficultyMultiplyer coinDropAmount;
     public static DifficultyMultiplyer coinValue;
-
-    // WaveArgs
-    public class WaveArgs : EventArgs
-    {
-        public int waveNumber;
-
-        public WaveArgs(int waveNumber)
-        {
-            this.waveNumber = waveNumber;
-        }
-    }
 
     private void Awake()
     {
@@ -64,11 +53,6 @@ public class ArenaController : MonoBehaviour
         coinDropAmount = new DifficultyMultiplyer(1, 0.5f, 20);
         coinValue = new DifficultyMultiplyer(1, 1, 20);
     }
-
-    void OnEnable()
-    {
-    }
-
 
 
     private void Action_performed(InputAction.CallbackContext obj)
@@ -96,7 +80,7 @@ public class ArenaController : MonoBehaviour
     private void HandleNextWave()
     {
         waveNumber++;
-        OnNextWave(this, new WaveArgs(waveNumber));
+        OnNextWave?.Invoke(this, new WaveEventArgs() { waveNumber = this.waveNumber });
 
         // increment all difficulty multiplyers
         enemyHealth.Increment();

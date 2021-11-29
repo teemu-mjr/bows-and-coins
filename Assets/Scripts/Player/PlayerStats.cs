@@ -31,7 +31,7 @@ public class PlayerStats
     public PlayerStats()
     {
         movementSpeed = new PlayerStat() { name = "moveSpeed", value = 500, maxValue = 1000 };
-        drawBackDelay = new PlayerStat() { name = "drawBackDelay", value = 3, maxValue = 0.1f };
+        drawBackDelay = new PlayerStat() { name = "drawBackDelay", value = 3, maxValue = 0.5f };
         arrowSpeed = new PlayerStat() { name = "arrowSpeed", value = 15, maxValue = 55 };
         flightTimeMax = new PlayerStat() { name = "flightTimeMax", value = 0.5f, maxValue = 2 };
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 2, maxValue = 50 };
@@ -71,7 +71,7 @@ public class PlayerStats
                 couldBuy = movementSpeed.Increment();
                 break;
             case "drawBackDelay":
-                couldBuy = drawBackDelay.Devide(1.188f);
+                couldBuy = drawBackDelay.Devide(1.098f);
                 break;
             case "arrowSpeed":
                 couldBuy = arrowSpeed.Increment();

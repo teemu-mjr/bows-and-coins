@@ -47,7 +47,7 @@ public class GameHUD : MonoBehaviour
         healthText.text = $"HP: {health.ToString()}";
     }
 
-    private void ArenaController_OnNextWave(object sender, ArenaController.WaveArgs e)
+    private void ArenaController_OnNextWave(object sender, WaveEventArgs e)
     {
         UpdateWave(e.waveNumber);
     }

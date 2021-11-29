@@ -35,6 +35,7 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         PlayerHealth.OnPlayerDeath += PlayerDied;
+        CloseShop();
     }
 
     public void BuyPlayerStat(string statName)
@@ -119,13 +120,13 @@ public class Shop : MonoBehaviour
 
     private void PlayerDied(object sender, EventArgs e)
     {
-        StartCoroutine(HandleWithDelay());
+        StartCoroutine(OpenWithDelay());
     }
 
-    private IEnumerator HandleWithDelay()
+    private IEnumerator OpenWithDelay()
     {
         yield return new WaitForSeconds(2);
-        HandleShop();
+        OpenShop();
     }
 
     public void HandleShop()

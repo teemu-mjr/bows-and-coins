@@ -12,7 +12,7 @@ public class TransformCameraOnNextWave : MonoBehaviour
         ArenaController.OnNextWave += TransformObject;
     }
 
-    private void TransformObject(object sender, EventArgs e)
+    private void TransformObject(object sender, WaveEventArgs e)
     {
         if(Camera.main.orthographic == true)
         {

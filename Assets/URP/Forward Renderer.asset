@@ -20,7 +20,7 @@ MonoBehaviour:
     NormalSamples: 1
     Intensity: 3
     DirectLightingStrength: 0.25
-    Radius: 0.035
+    Radius: 0.1
     SampleCount: 6
 --- !u!114 &11400000
 MonoBehaviour:

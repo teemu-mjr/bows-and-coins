@@ -1,19 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    // public fields
-    public AudioClip hitEnemy;
-    public AudioClip hitWall;
-
     // private fields
     [HideInInspector] public float heldBackProcentage;
-
     private Rigidbody rb;
     private float fightTime;
     private float flightTimeMax;
+
+    // events
+    public static event EventHandler OnHitWall;
 
     private void Start()
     {
@@ -49,10 +48,13 @@ public class Arrow : MonoBehaviour
         else if (other.transform.root.GetComponent<EnemyArrow>())
         {
             Destroy(other.gameObject);
+            Destroy(gameObject);
+            OnHitWall?.Invoke(this, EventArgs.Empty);
         }
         else if (!other.transform.root.GetComponent<PlayerHealth>())
         {
             Destroy(gameObject);
+            OnHitWall?.Invoke(this, EventArgs.Empty);
         }
 
     }

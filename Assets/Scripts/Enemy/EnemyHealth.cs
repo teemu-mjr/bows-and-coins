@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class EnemyHealth : MonoBehaviour
     private float health;
     private int dropAmount;
     private Transform coinTransform;
+
+    // events
+    public static event EventHandler OnDeath;
 
     private void Start()
     {
@@ -34,6 +38,7 @@ public class EnemyHealth : MonoBehaviour
     public void Die()
     {
         DropItem();
+        OnDeath?.Invoke(this, EventArgs.Empty);
         Destroy(gameObject);
     }
 
