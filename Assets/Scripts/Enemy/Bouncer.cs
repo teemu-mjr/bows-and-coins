@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Bouncer : Enemy
 {
+    // public fields
     public GameObject arrow;
+    public GameObject rotatingShell;
     public Transform firePoint;
 
+    // private fields
     private float maxSpeed = 5;
     private float arrowSpeed = 5;
     private float speedX = 10;
     private float speedY = 10;
+    private bool isDrawn;
+
+    // events
+    public event System.EventHandler OnDraw;
+    public event System.EventHandler OnShoot;
 
     void Start()
     {
@@ -19,7 +27,7 @@ public class Bouncer : Enemy
         speedY = Random.Range(-maxSpeed, maxSpeed);
         arrowSpeed = ArenaController.enemyArrowSpeed.Value;
         arrow.GetComponent<EnemyArrow>().speed = arrowSpeed;
-        InvokeRepeating("ShootArrow", Random.Range(0.5f, 2f), ArenaController.enemyShotInterval.Value);
+        isDrawn = false;
     }
 
     // Update is called once per frame
@@ -28,10 +36,17 @@ public class Bouncer : Enemy
         if (!isFrozen)
         {
             Move();
+            LookAtPlayer();
+        }
+        if (!isDrawn)
+        {
+            OnDraw?.Invoke(this, System.EventArgs.Empty);
+            isDrawn = true;
         }
         else if (timeAlive > startupFreeze && isFrozen)
         {
             isFrozen = false;
+            InvokeRepeating("ShootArrow", Random.Range(0.5f, 2f), ArenaController.enemyShotInterval.Value);
         }
         else if (isFrozen)
         {
@@ -45,10 +60,16 @@ public class Bouncer : Enemy
         transform.Translate(Vector3.right * speedX * Time.deltaTime);
     }
 
+    private void LookAtPlayer()
+    {
+        rotatingShell.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
+    }
+
     private void ShootArrow()
     {
-        firePoint.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-        Instantiate(arrow, transform.position, firePoint.rotation);
+        Instantiate(arrow, firePoint.transform.position, firePoint.transform.rotation);
+        OnShoot?.Invoke(this, System.EventArgs.Empty);
+        isDrawn = false;
     }
 
     private void OnCollisionEnter(Collision collision)
