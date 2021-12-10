@@ -30,7 +30,7 @@ public class ArrowSoundController : SoundController
 
     private void Arrow_OnHitWall(object sender, System.EventArgs e)
     {
-        PlaySound(wallHit);
+        PlaySound(wallHit, 0.2f);
     }
 
     private void OnDisable()

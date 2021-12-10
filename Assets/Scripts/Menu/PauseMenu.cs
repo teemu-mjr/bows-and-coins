@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
 
     public GameObject pauseMenu;
+    public GameObject pauseObject;
+    public GameObject optionsObject;
 
     private PlayerInputActions inputActions;
 
@@ -34,11 +36,19 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void HandleOptions()
+    {
+        pauseObject.SetActive(!pauseObject.activeSelf);
+        optionsObject.SetActive(!optionsObject.activeSelf);
+    }
+
     private void Pause()
     {
         isPaused = true;
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
+        pauseObject.SetActive(true);
+        optionsObject.SetActive(false);
     }
 
     public void Continue()

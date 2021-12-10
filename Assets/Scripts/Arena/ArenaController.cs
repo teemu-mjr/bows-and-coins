@@ -66,6 +66,11 @@ public class ArenaController : MonoBehaviour
         PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
     }
 
+    private void Start()
+    {
+        GameObject.Find("Music").GetComponent<MusicController>().PlaySong(0);
+    }
+
     private void PlayerHealth_OnPlayerDeath(object sender, EventArgs e)
     {
         for (int i = 0; i < transform.GetChild(0).childCount; i++)

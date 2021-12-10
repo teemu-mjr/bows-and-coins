@@ -53,7 +53,6 @@ public class PlayerStat
         if (addValue == 0 && this.addValue == 0)
         {
             this.addValue = (maxValue - value) / 20;
-            Debug.Log("addvalue: " + this.addValue);
         }
         else if (addValue != 0)
         {
@@ -73,7 +72,6 @@ public class PlayerStat
             else
             {
                 maxed = true;
-                Debug.Log($"{name} MAXED!");
             }
             return true;
         }
@@ -98,7 +96,6 @@ public class PlayerStat
             else
             {
                 maxed = true;
-                Debug.Log($"{name} MAXED!");
             }
             return true;
         }

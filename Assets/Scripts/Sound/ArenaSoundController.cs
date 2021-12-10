@@ -15,7 +15,7 @@ public class ArenaSoundController : SoundController
     }
     private void ArenaController_OnNextWave(object sender, WaveEventArgs e)
     {
-        PlaySound(enemySpawn, 0.2f);
+        PlaySound(enemySpawn, 0.4f);
     }
 
     private void OnDisable()

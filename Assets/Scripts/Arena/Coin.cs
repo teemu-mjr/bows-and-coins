@@ -25,16 +25,16 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (rb.isKinematic == false && other.CompareTag("Ground"))
-        {
-            rb.isKinematic = true;
-        }
         if (other.CompareTag("Player"))
         {
             Player.stats.AddCoins(coinValue);
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Enemy"))
+        if (rb.isKinematic == false && other.CompareTag("Ground"))
+        {
+            rb.isKinematic = true;
+        }
+        else if (other.CompareTag("TriggerZ") || other.CompareTag("TriggerX"))
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }

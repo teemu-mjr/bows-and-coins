@@ -31,6 +31,10 @@ public class Shop : MonoBehaviour
     public GameObject repeaterToggle;
     public GameObject tripleToggle;
 
+    // events
+    public static event EventHandler OnBuy;
+    public static event EventHandler OnDecline;
+
 
     private void Awake()
     {
@@ -42,11 +46,11 @@ public class Shop : MonoBehaviour
     {
         if (Player.stats.IncrementStat(statName))
         {
-            Debug.Log($"You bought upgraded {statName}");
+            OnBuy?.Invoke(this, EventArgs.Empty);
         }
         else
         {
-            Debug.Log("FAIL");
+            OnDecline?.Invoke(this, EventArgs.Empty);
         }
         UpdateText();
     }
@@ -62,7 +66,7 @@ public class Shop : MonoBehaviour
             else
             {
                 Player.stats.repeater.inUse = true;
-            }           
+            }
         }
         if (statName == "triple")
         {

@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Public field
-    public Shop shop;
+    // public fields
 
     // Private fields
     private PlayerInputActions playerInputActions;
     private Player player;
+    private Options options;
 
     // Events
     public static event EventHandler OnGameStart;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 144;
+        Application.targetFrameRate = 60;
 
         // creating player input actions
         playerInputActions = new PlayerInputActions();
@@ -34,11 +34,13 @@ public class GameManager : MonoBehaviour
         // creating the only player instance of the game
         player = new Player();
         OnGameStart?.Invoke(this, EventArgs.Empty);
+
+        // creating the only OptionData instance
+        options = new Options();
     }
 
     public void LoadScene(int sceneIndex)
     {
-        // TODO: Reset money / open the shop better
         Player.stats.ResetCoins();
         player.SavePlayer();
 

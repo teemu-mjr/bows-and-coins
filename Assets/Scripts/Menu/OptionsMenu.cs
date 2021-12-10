@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class OptionsMenu : MonoBehaviour
 {
     // public fields
     public TextMeshProUGUI easyModeInfo;
+    public Slider musicVolume;
+    public Slider effectVolume;
+    public AudioSource testAudio;
+    public AudioClip testSound;
 
     // private fields
     private static bool doubleCoins;
     private SerializeData serializeData;
-    private OptionData options;
+    private int cooldown;
 
     // properties
     public static bool DoubleCoins { get { return doubleCoins; } }
@@ -28,12 +33,35 @@ public class OptionsMenu : MonoBehaviour
         doubleCoins = !doubleCoins;
         RenderOptions();
 
-        options.easyMode = doubleCoins;
+        Options.optionData.easyMode = doubleCoins;
         SaveOptions();
+    }
+
+    public void ChangeMusicVolume(float volume)
+    {
+        Options.optionData.musicVolume = volume;
+        SaveOptions();
+    }
+    public void ChangeEffectVolume(float volume)
+    {
+        Options.optionData.effectVolume = volume;
+        SaveOptions();
+
+        if (cooldown >= 5)
+        {
+            testAudio.PlayOneShot(testSound, volume);
+            cooldown = 0;
+        }
+        else
+        {
+            cooldown++;
+        }
     }
 
     private void RenderOptions()
     {
+        musicVolume.value = Options.optionData.musicVolume;
+        effectVolume.value = Options.optionData.effectVolume;
 
         if (doubleCoins)
         {
@@ -47,13 +75,12 @@ public class OptionsMenu : MonoBehaviour
 
     private void SaveOptions()
     {
-        serializeData.SaveData<OptionData>(options, "options");
+        serializeData.SaveData<Options.OptionData>(Options.optionData, "options");
     }
 
     private void LoadOptions()
     {
-        options = serializeData.LoadData<OptionData>("options");
-
-        doubleCoins = options.easyMode;
+        Options.optionData = serializeData.LoadData<Options.OptionData>("options");
+        doubleCoins = Options.optionData.easyMode;
     }
 }

@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
+        GameObject.Find("Music").GetComponent<MusicController>().PlaySong(2);
     }
 
     public void StartGame()

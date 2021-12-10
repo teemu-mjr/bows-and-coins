@@ -6,7 +6,6 @@ public class PlayerSoundController : SoundController
 {
     // audio clips
     public AudioClip playerDamage;
-    public AudioClip playerDeath;
 
     private void Awake()
     {
@@ -18,7 +17,7 @@ public class PlayerSoundController : SoundController
 
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
     {
-        PlaySound(playerDeath);
+        PlaySound(playerDamage);
     }
 
     private void PlayerHealth_OnPlayerDamage(object sender, PlayerHealthArgs e)

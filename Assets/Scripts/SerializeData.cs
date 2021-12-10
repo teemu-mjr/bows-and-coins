@@ -44,7 +44,7 @@ public class SerializeData
         }
         else if (fileName == "options")
         {
-            object obj = new OptionData();
+            object obj = new Options.OptionData();
             return (T)obj;
         }
         else
