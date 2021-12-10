@@ -87,7 +87,7 @@ MonoBehaviour:
   target: {fileID: 4764250337768439556, guid: 8514a117a545a36469c79563a570cf61, type: 3}
   startupFreeze: 1
   isFrozen: 1
-  knockBackForce: 10
+  knockBackForce: 150
   timeAlive: 0
 --- !u!114 &7057209437664066595
 MonoBehaviour:
@@ -104,6 +104,7 @@ MonoBehaviour:
   coin: {fileID: 2923249501993582414, guid: 9abf40b40af81cb488c0db96912458bb, type: 3}
   body: {fileID: 2502516728860110551, guid: 243c359fcd5337240a425dc7c31a69eb, type: 3}
   heathBar: {fileID: 4400917507211107427}
+  bodyTransformObject: {fileID: 0}
 --- !u!65 &5800120534649851868
 BoxCollider:
   m_ObjectHideFlags: 0

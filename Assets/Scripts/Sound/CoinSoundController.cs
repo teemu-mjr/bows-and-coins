@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinSoundController : MonoBehaviour
+public class CoinSoundController : SoundController
 {
     // audio clips
     public AudioClip coinPickup;
-    // private fields
-    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -22,14 +20,6 @@ public class CoinSoundController : MonoBehaviour
         {
             PlaySound(coinPickup);
         }
-    }
-
-
-    public void PlaySound(AudioClip clip, float volume = 1)
-    {
-        audioSource.volume = volume;
-        audioSource.clip = clip;
-        audioSource.Play();
     }
 
     private void OnDisable()

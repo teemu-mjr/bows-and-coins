@@ -81,7 +81,7 @@ MonoBehaviour:
   target: {fileID: 4764250337768439556, guid: 8514a117a545a36469c79563a570cf61, type: 3}
   startupFreeze: 1
   isFrozen: 1
-  knockBackForce: 10
+  knockBackForce: 150
   timeAlive: 0
   arrow: {fileID: 6754017770230305004, guid: 067f2db428b681242baf46ed4f0aab20, type: 3}
   rotatingShell: {fileID: 6857752843667224830}

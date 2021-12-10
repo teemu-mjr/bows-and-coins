@@ -17,9 +17,13 @@ public class Bow : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Vector2 shootingVector;
     private float heldBackTime = 0;
+    private bool startedToDraw;
+    private bool isReady;
 
     // events
     public static event EventHandler OnShoot;
+    public static event EventHandler OnDraw;
+    public static event EventHandler OnReady;
 
     private void Awake()
     {
@@ -39,6 +43,7 @@ public class Bow : MonoBehaviour
             heldBackTime = 0;
             heldBackProcentage = 0;
             powerBar.SetPower(heldBackProcentage);
+            startedToDraw = false;
         }
     }
 
@@ -62,6 +67,22 @@ public class Bow : MonoBehaviour
         {
             Shoot();
         }
+
+        if(heldBackProcentage >= 0.4f && !startedToDraw)
+        {
+            OnDraw?.Invoke(this, EventArgs.Empty);
+            startedToDraw = true;
+        }
+
+        if (heldBackProcentage >= 1 && !isReady)
+        {
+            OnReady?.Invoke(this, EventArgs.Empty);
+            isReady = true;
+        }
+        else if (heldBackProcentage < 1)
+        {
+            isReady = false;
+        }
     }
 
     private void FirePerformed(InputAction.CallbackContext context)
@@ -71,19 +92,21 @@ public class Bow : MonoBehaviour
 
     private void Shoot()
     {
-        if (heldBackTime / Player.stats.drawBackDelay.value > 0.4f)
+        if (heldBackTime / Player.stats.drawBackDelay.value < 0.5f)
         {
-            arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
-            Instantiate(arrow, (transform.position + transform.forward * 0.8f + shootOffset), transform.rotation);
-            if (Player.stats.tripleShot.maxed && Player.stats.tripleShot.inUse)
-            {
-                Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
-                Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));
-            }
-            OnShoot?.Invoke(this, EventArgs.Empty);
+            return;
         }
+        arrow.GetComponent<Arrow>().heldBackProcentage = heldBackProcentage;
+        Instantiate(arrow, (transform.position + transform.forward * 0.8f + shootOffset), transform.rotation);
+        if (Player.stats.tripleShot.maxed && Player.stats.tripleShot.inUse)
+        {
+            Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
+            Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));
+        }
+        OnShoot?.Invoke(this, EventArgs.Empty);
         heldBackTime = 0;
         heldBackProcentage = 0;
+        startedToDraw = false;
     }
 
     private void RotatePlayerWithInputVector(Vector2 rotatingVector)

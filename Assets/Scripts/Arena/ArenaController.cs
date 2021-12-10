@@ -62,8 +62,20 @@ public class ArenaController : MonoBehaviour
         {
             coinValue = new DifficultyMultiplyer(1, 1, 40);
         }
+
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
     }
 
+    private void PlayerHealth_OnPlayerDeath(object sender, EventArgs e)
+    {
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            if (transform.GetChild(0).GetChild(i).GetComponent<EnemyHealth>())
+            {
+                transform.GetChild(0).GetChild(i).GetComponent<EnemyHealth>().Die();
+            }
+        }
+    }
 
     private void Action_performed(InputAction.CallbackContext obj)
     {
@@ -84,7 +96,7 @@ public class ArenaController : MonoBehaviour
     {
         transform.position += new Vector3(.8f, 0, .5f);
         spawnArea += new Vector2(1.6f, 1f);
-        fallCollider.size = new Vector3(spawnArea.x + 20, 1, spawnArea.y + 20);
+        fallCollider.size = new Vector3(spawnArea.x + 40, 3, spawnArea.y + 40);
     }
 
     private void HandleNextWave()
@@ -135,6 +147,7 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Disable();
         playerInputActions.Player.Action.performed -= Action_performed;
         SpawnFloorTiles.OnReady -= SpawnFloorTiles_OnReady;
+        PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
     }
 
     private void OnTriggerEnter(Collider other)

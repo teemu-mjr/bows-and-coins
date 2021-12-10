@@ -55,7 +55,7 @@ public class SpawnWallParts : MonoBehaviour
 
         while (transform.position != targetVector)
         {
-            transform.position = Vector3.Lerp(transform.position, targetVector, timeElapsed / 3);
+            transform.position = Vector3.Lerp(transform.position, targetVector, timeElapsed / 10);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
