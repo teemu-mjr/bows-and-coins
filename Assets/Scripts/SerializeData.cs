@@ -16,30 +16,40 @@ public class SerializeData
         }
     }
 
-    public void SaveData <T> (T data)
+    public void SaveData <T> (T data, string fileName)
     {
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
 
-        using(TextWriter writer = new StreamWriter(@$"{SAVE_FOLDER}\playerStats.xml"))
+        using(TextWriter writer = new StreamWriter(@$"{SAVE_FOLDER}\{fileName}.xml"))
         {
             xmlSerializer.Serialize(writer, data);
         }
     }
 
 
-    public T LoadData<T>()
+    public T LoadData<T>(string fileName)
     {
         XmlSerializer deserializer = new XmlSerializer(typeof(T));
-        if (File.Exists(@$"{SAVE_FOLDER}\playerStats.xml"))
+        if (File.Exists(@$"{SAVE_FOLDER}\{fileName}.xml"))
         {
-            TextReader reader = new StreamReader(@$"{SAVE_FOLDER}\playerStats.xml");
+            TextReader reader = new StreamReader(@$"{SAVE_FOLDER}\{fileName}.xml");
             object obj = deserializer.Deserialize(reader);
             reader.Close();
             return (T)obj;
         }
-        else
+        else if (fileName == "playerStats")
         {
             object obj = new PlayerStats();
+            return (T)obj;
+        }
+        else if (fileName == "options")
+        {
+            object obj = new OptionData();
+            return (T)obj;
+        }
+        else
+        {
+            object obj = null;
             return (T)obj;
         }
     }

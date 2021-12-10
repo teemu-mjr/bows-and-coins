@@ -62,7 +62,6 @@ public class EnemyHealth : MonoBehaviour
         if (body)
         {
             Instantiate(body, bodyTransformObject.transform);
-            Debug.Log(transform.rotation);
         }
     }
 

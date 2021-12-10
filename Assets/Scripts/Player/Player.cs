@@ -9,11 +9,11 @@ public class Player
 
     public Player()
     {
-        stats = serializeData.LoadData<PlayerStats>();        
+        stats = serializeData.LoadData<PlayerStats>("playerStats");        
     }    
 
     public void SavePlayer()
     {
-        serializeData.SaveData<PlayerStats>(stats);
+        serializeData.SaveData<PlayerStats>(stats, "playerStats");
     }
 }

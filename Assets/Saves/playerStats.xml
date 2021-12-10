@@ -2,20 +2,20 @@
 <PlayerStats xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <movementSpeed>
     <name>moveSpeed</name>
-    <level>1</level>
-    <value>1000</value>
+    <level>12</level>
+    <value>800</value>
     <maxValue>1000</maxValue>
-    <cost>21</cost>
+    <cost>110</cost>
     <maxed>false</maxed>
     <inUse>true</inUse>
     <addValue>25</addValue>
   </movementSpeed>
   <drawBackDelay>
     <name>drawBackDelay</name>
-    <level>2</level>
-    <value>0.5</value>
+    <level>0</level>
+    <value>3</value>
     <maxValue>0.5</maxValue>
-    <cost>25</cost>
+    <cost>62</cost>
     <maxed>false</maxed>
     <inUse>true</inUse>
     <addValue>0</addValue>
@@ -23,9 +23,9 @@
   <arrowSpeed>
     <name>arrowSpeed</name>
     <level>0</level>
-    <value>55</value>
+    <value>15</value>
     <maxValue>55</maxValue>
-    <cost>17</cost>
+    <cost>62</cost>
     <maxed>false</maxed>
     <inUse>true</inUse>
     <addValue>0</addValue>
@@ -33,9 +33,9 @@
   <flightTimeMax>
     <name>flightTimeMax</name>
     <level>0</level>
-    <value>2</value>
+    <value>0.5</value>
     <maxValue>2</maxValue>
-    <cost>17</cost>
+    <cost>62</cost>
     <maxed>false</maxed>
     <inUse>true</inUse>
     <addValue>0</addValue>
@@ -43,9 +43,9 @@
   <arrowDamage>
     <name>arrowDamage</name>
     <level>0</level>
-    <value>50</value>
+    <value>2</value>
     <maxValue>50</maxValue>
-    <cost>17</cost>
+    <cost>62</cost>
     <maxed>false</maxed>
     <inUse>true</inUse>
     <addValue>0</addValue>
@@ -53,21 +53,21 @@
   <repeater>
     <name>repeater</name>
     <level>0</level>
-    <value>5</value>
+    <value>0</value>
     <maxValue>1</maxValue>
     <cost>250</cost>
-    <maxed>true</maxed>
-    <inUse>false</inUse>
+    <maxed>false</maxed>
+    <inUse>true</inUse>
     <addValue>0</addValue>
   </repeater>
   <tripleShot>
     <name>triple</name>
     <level>0</level>
-    <value>5</value>
+    <value>0</value>
     <maxValue>1</maxValue>
     <cost>1500</cost>
-    <maxed>true</maxed>
-    <inUse>false</inUse>
+    <maxed>false</maxed>
+    <inUse>true</inUse>
     <addValue>0</addValue>
   </tripleShot>
 </PlayerStats>

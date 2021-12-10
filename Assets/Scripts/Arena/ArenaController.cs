@@ -53,7 +53,15 @@ public class ArenaController : MonoBehaviour
         dasherSpeed = new DifficultyMultiplyer(75, 5, 250);
         boucerSpeed = new DifficultyMultiplyer(0.5f, 0.25f, 5);
         coinDropAmount = new DifficultyMultiplyer(1, 0.5f, 20);
-        coinValue = new DifficultyMultiplyer(1, 1, 20);
+
+        if (OptionsMenu.DoubleCoins)
+        {
+            coinValue = new DifficultyMultiplyer(2, 4, 20);
+        }
+        else
+        {
+            coinValue = new DifficultyMultiplyer(1, 1, 40);
+        }
     }
 
 
