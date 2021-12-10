@@ -40,6 +40,10 @@ public class PlayerAnimationController : MonoBehaviour
             animator.SetTrigger("DrawBow");
             isDrawn = true;
         }
+        if(Bow.isShooting && isDrawn)
+        {
+            animator.SetFloat("DrawBack", Bow.heldBackProcentage);
+        }
         else if (!Bow.isShooting && isDrawn)
         {
             isDrawn = false;

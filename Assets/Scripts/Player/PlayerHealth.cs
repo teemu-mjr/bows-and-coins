@@ -6,13 +6,16 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // events
-    public static event EventHandler<PlayerHealthArgs> OnPlayerDamage;
-    public static event EventHandler OnPlayerDeath;
+    // public events
+    public GameObject deadPlayer;
 
     // private fields
     private static bool isAlive = true;
     private int health = 3;
+
+    // events
+    public static event EventHandler<PlayerHealthArgs> OnPlayerDamage;
+    public static event EventHandler OnPlayerDeath;
 
     // Propertyes
     public static bool IsAlive
@@ -42,5 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
         isAlive = false;
         OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        gameObject.SetActive(false);
+        Instantiate(deadPlayer, transform.position, transform.rotation);
     }
 }

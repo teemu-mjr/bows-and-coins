@@ -12,6 +12,7 @@ TagManager:
   - TriggerX
   - EnemyArrow
   - Wall
+  - Particle
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Particle
   - 
   - 
   - 

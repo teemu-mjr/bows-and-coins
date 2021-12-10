@@ -82,7 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cae4e06d88108446bd95825c30f3408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToDrop: {fileID: 2923249501993582414, guid: 9abf40b40af81cb488c0db96912458bb, type: 3}
+  coin: {fileID: 2923249501993582414, guid: 9abf40b40af81cb488c0db96912458bb, type: 3}
+  body: {fileID: 3353885859354129221, guid: 87da645690683604285064b18246023f, type: 3}
   heathBar: {fileID: 4008190201489210107}
 --- !u!136 &3284405903787718685
 CapsuleCollider:

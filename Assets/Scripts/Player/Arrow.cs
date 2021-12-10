@@ -41,10 +41,16 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.transform.root.GetComponent<PlayerHealth>() || other.CompareTag("Particle"))
+        {
+            return;
+        }
+
         if (other.transform.root.GetComponent<Enemy>())
         {
             Destroy(gameObject);
         }
+
         else if (other.transform.root.GetComponent<EnemyArrow>())
         {
             Destroy(other.gameObject);

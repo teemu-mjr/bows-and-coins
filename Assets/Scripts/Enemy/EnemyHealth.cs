@@ -6,8 +6,10 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     // public fields
-    public GameObject itemToDrop;
+    public GameObject coin;
+    public GameObject body;
     public GameObject heathBar;
+    public GameObject bodyTransformObject;
 
     // private fields
     private float health;
@@ -16,12 +18,17 @@ public class EnemyHealth : MonoBehaviour
 
     // events
     public static event EventHandler OnDeath;
+    public event EventHandler OnDamage;
 
     private void Start()
     {
+        if (!bodyTransformObject)
+        {
+            bodyTransformObject = transform.gameObject;
+        }
         health = ArenaController.enemyHealth.Value;
         dropAmount = Mathf.RoundToInt(ArenaController.coinDropAmount.Value);
-        itemToDrop.GetComponent<Coin>().coinValue = Mathf.RoundToInt(ArenaController.coinValue.Value);
+        coin.GetComponent<Coin>().coinValue = Mathf.RoundToInt(ArenaController.coinValue.Value);
         coinTransform = GameObject.Find("Coins").transform;
     }
 
@@ -32,6 +39,10 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+        else
+        {
+            OnDamage?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -46,7 +57,12 @@ public class EnemyHealth : MonoBehaviour
     {
         for (int i = 0; i < dropAmount; i++)
         {
-            Instantiate(itemToDrop, transform.position, transform.rotation, coinTransform);
+            Instantiate(coin, transform.position, transform.rotation, coinTransform);
+        }
+        if (body)
+        {
+            Instantiate(body, bodyTransformObject.transform);
+            Debug.Log(transform.rotation);
         }
     }
 

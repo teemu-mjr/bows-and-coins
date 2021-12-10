@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class BoucerAnimationController : MonoBehaviour
 {
-    private Animator animator;
+    public Animator boucerAnimator;
+    public Animator chairAnimator;
    private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
         GetComponentInParent<Bouncer>().OnDraw += BoucerAnimationController_OnDraw;
         GetComponentInParent<Bouncer>().OnShoot += BoucerAnimationController_OnShoot;
+        GetComponentInParent<EnemyHealth>().OnDamage += BoucerAnimationController_OnDamage;
     }
+
 
     private void BoucerAnimationController_OnShoot(object sender, System.EventArgs e)
     {
-        animator.SetTrigger("Shoot");
+        boucerAnimator.SetTrigger("Shoot");
     }
 
     private void BoucerAnimationController_OnDraw(object sender, System.EventArgs e)
     {
-        animator.SetTrigger("Draw");
+        boucerAnimator.SetTrigger("Draw");
+    }
+    private void BoucerAnimationController_OnDamage(object sender, System.EventArgs e)
+    {
+        chairAnimator.SetTrigger("Damage");
     }
 
     private void OnDisable()

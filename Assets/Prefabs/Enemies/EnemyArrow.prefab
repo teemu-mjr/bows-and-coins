@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3043673522749570484}
   - component: {fileID: 7406167410656655961}
   - component: {fileID: 7069479270151413757}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: EnemyArrow
   m_TagString: EnemyArrow
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c51efcdcaf0e8741a8c3686ad7c5506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5.25
+  speed: 5.5
   flightTimeMax: 1
 --- !u!1001 &3804559655137243926
 PrefabInstance:
@@ -86,7 +86,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8921815983235511357, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_RootOrder
@@ -154,7 +154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3654322227651792216, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -914332758332951627, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_TagString
@@ -182,7 +182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_TagString
@@ -202,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fb468158e241daf46b1b80ea43fd1507, type: 2}
     - target: {fileID: 6512470654275811232, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7876023681238672744, guid: 9ebc4ea7e79d77c41bd17f4f708d7e83, type: 3}
       propertyPath: m_LocalScale.y

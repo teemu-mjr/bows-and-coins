@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerLoadScene_performed(InputAction.CallbackContext context)
     {
-        LoadScene(0);
+        LoadScene(1);
     }
 
     private void OnPlayerDeath(object sender, EventArgs e)

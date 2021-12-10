@@ -77,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
     {
         this.enabled = false;
-        rb.AddForce(Vector3.up * 100, ForceMode.Impulse);
     }
 
     private void OnDisable()

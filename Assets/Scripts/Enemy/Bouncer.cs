@@ -10,7 +10,7 @@ public class Bouncer : Enemy
     public Transform firePoint;
 
     // private fields
-    private float maxSpeed = 5;
+    private float maxSpeed;
     private float arrowSpeed = 5;
     private float speedX = 10;
     private float speedY = 10;
@@ -23,6 +23,7 @@ public class Bouncer : Enemy
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        maxSpeed = ArenaController.boucerSpeed.Value;
         speedX = Random.Range(-maxSpeed, maxSpeed);
         speedY = Random.Range(-maxSpeed, maxSpeed);
         arrowSpeed = ArenaController.enemyArrowSpeed.Value;
