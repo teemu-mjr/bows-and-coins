@@ -7,7 +7,7 @@ public class EnemyArrow : MonoBehaviour
 {
     // public fields
     public float speed;
-    public float flightTimeMax = 1;
+    public float flightTimeMax;
 
     // private fields
     private Rigidbody rb;
@@ -18,6 +18,7 @@ public class EnemyArrow : MonoBehaviour
 
     void Start()
     {
+        flightTimeMax = ArenaController.enemyArrowFightTime.Value;
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
         OnShoot?.Invoke(this, EventArgs.Empty);

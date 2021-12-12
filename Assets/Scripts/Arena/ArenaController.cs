@@ -29,6 +29,7 @@ public class ArenaController : MonoBehaviour
     public static DifficultyMultiplyer enemyHealth;
     public static DifficultyMultiplyer enemyArrowSpeed;
     public static DifficultyMultiplyer enemyShotInterval;
+    public static DifficultyMultiplyer enemyArrowFightTime;
     public static DifficultyMultiplyer huggerSpeed;
     public static DifficultyMultiplyer dasherSpeed;
     public static DifficultyMultiplyer boucerSpeed;
@@ -49,6 +50,7 @@ public class ArenaController : MonoBehaviour
         enemyHealth = new DifficultyMultiplyer(1, 2f, 100);
         enemyArrowSpeed = new DifficultyMultiplyer(5, 0.125f, 10);
         enemyShotInterval = new DifficultyMultiplyer(3, 0.05f, 0.75f, true);
+        enemyArrowFightTime = new DifficultyMultiplyer(1, 0.25f, 3f, true);
         huggerSpeed = new DifficultyMultiplyer(1, 0.2f, 6);
         dasherSpeed = new DifficultyMultiplyer(75, 5, 250);
         boucerSpeed = new DifficultyMultiplyer(0.5f, 0.25f, 5);
@@ -87,7 +89,6 @@ public class ArenaController : MonoBehaviour
         if (canSpawn)
         {
             HandleNextWave();
-            TransformSpawnArea();
             canSpawn = false;
         }
     }
@@ -113,6 +114,7 @@ public class ArenaController : MonoBehaviour
         enemyHealth.Increment();
         enemyArrowSpeed.Increment();
         enemyShotInterval.Increment();
+        enemyArrowFightTime.Increment();
         dasherSpeed.Increment();
         huggerSpeed.Increment();
         boucerSpeed.Increment();
@@ -125,6 +127,7 @@ public class ArenaController : MonoBehaviour
         {
             SpawnWithDelay(waveNumber);
         }
+        TransformSpawnArea();
         canSpawn = true;
     }
 

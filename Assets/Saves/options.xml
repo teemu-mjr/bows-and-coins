@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <OptionData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <easyMode>false</easyMode>
-  <musicVolume>0.5</musicVolume>
+  <musicVolume>0.04778209</musicVolume>
   <effectVolume>1</effectVolume>
 </OptionData>
