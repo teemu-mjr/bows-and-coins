@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3043673522749570484}
   - component: {fileID: 7406167410656655961}
   - component: {fileID: 7069479270151413757}
+  - component: {fileID: -1143676549940075763}
   m_Layer: 0
   m_Name: EnemyArrow
   m_TagString: EnemyArrow
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5.5
   flightTimeMax: 1
+  bowShoot: {fileID: 8300000, guid: 0d8e79a603825ca4cbc6823f02df5e18, type: 3}
+  arrowDestroy: {fileID: 8300000, guid: 6f525ec88fca41549a6f3b694395b2f1, type: 3}
+--- !u!114 &-1143676549940075763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754017770230305004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed376c1f10f30647985a82b8f686151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3804559655137243926
 PrefabInstance:
   m_ObjectHideFlags: 0

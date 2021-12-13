@@ -37,8 +37,7 @@ public class PlayerStats
         arrowDamage = new PlayerStat() { name = "arrowDamage", value = 2, maxValue = 50 };
         repeater = new PlayerStat() { name = "repeater", value = 0, maxValue = 1, cost = 250 };
         tripleShot = new PlayerStat() { name = "triple", value = 0, maxValue = 1, cost = 1500 };
-        coins = 100000;
-
+        coins = 0;
     }
 
     public void AddCoins(int amount)

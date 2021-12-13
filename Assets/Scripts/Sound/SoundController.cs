@@ -8,8 +8,6 @@ public class SoundController : MonoBehaviour
     [HideInInspector] public AudioSource audioSource;
     public void PlaySound(AudioClip clip, float volume = 1)
     {
-        audioSource.volume = volume * Options.optionData.effectVolume;
-        audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.PlayOneShot(clip, volume * Options.optionData.effectVolume);
     }
 }

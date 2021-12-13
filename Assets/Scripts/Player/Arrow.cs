@@ -11,8 +11,10 @@ public class Arrow : MonoBehaviour
     private float fightTime;
     private float flightTimeMax;
 
-    // events
-    public static event EventHandler OnHitWall;
+    // audio
+    public AudioClip arrowBreak;
+    public AudioClip arrowHit;
+    private PlaySound playSound;
 
     private void Start()
     {
@@ -27,6 +29,9 @@ public class Arrow : MonoBehaviour
         rb.velocity = transform.forward * Player.stats.arrowSpeed.value * heldBackProcentage;
 
         flightTimeMax = Player.stats.flightTimeMax.value * heldBackProcentage;
+
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
     }
 
     private void FixedUpdate()
@@ -46,8 +51,9 @@ public class Arrow : MonoBehaviour
             return;
         }
 
-        if (other.transform.root.GetComponent<Enemy>())
+        if (other.gameObject.GetComponent<EnemyHealth>())
         {
+            playSound.Play(arrowHit, true);
             Destroy(gameObject);
         }
 
@@ -55,13 +61,18 @@ public class Arrow : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
-            OnHitWall?.Invoke(this, EventArgs.Empty);
+            playSound.Play(arrowBreak, true);
         }
         else if (!other.transform.root.GetComponent<PlayerHealth>())
         {
             Destroy(gameObject);
-            OnHitWall?.Invoke(this, EventArgs.Empty);
+            playSound.Play(arrowBreak, true);
         }
 
+    }
+
+    private void OnDestroy()
+    {
+        playSound.DestroyAudio();
     }
 }

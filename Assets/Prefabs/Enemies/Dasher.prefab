@@ -33,6 +33,7 @@ GameObject:
   - component: {fileID: 7057209437664066595}
   - component: {fileID: 5800120534649851868}
   - component: {fileID: -9213085926697793153}
+  - component: {fileID: 7729653934188688562}
   m_Layer: 7
   m_Name: Dasher
   m_TagString: Enemy
@@ -105,6 +106,7 @@ MonoBehaviour:
   body: {fileID: 2502516728860110551, guid: 243c359fcd5337240a425dc7c31a69eb, type: 3}
   heathBar: {fileID: 4400917507211107427}
   bodyTransformObject: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: a50e7158832e0964291d2c57d2596f54, type: 3}
 --- !u!65 &5800120534649851868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -131,6 +133,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 428183210374733398}
+--- !u!114 &7729653934188688562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846979498638338192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed376c1f10f30647985a82b8f686151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1143454232891937602
 PrefabInstance:
   m_ObjectHideFlags: 0

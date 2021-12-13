@@ -18,6 +18,11 @@ public class ArenaController : MonoBehaviour
     private BoxCollider fallCollider;
     private int waveNumber;
     private bool canSpawn;
+    private Transform spawnTransform;
+
+    // audio
+    public AudioClip spawnSound;
+    private PlaySound playSound;
 
     // events
     public static event EventHandler<WaveEventArgs> OnNextWave;
@@ -43,6 +48,10 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Action.performed += Action_performed;
         SpawnFloorTiles.OnReady += SpawnFloorTiles_OnReady;
         fallCollider = GetComponent<BoxCollider>();
+        spawnTransform = GameObject.Find("Enemies").transform;
+
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
 
         waveNumber = 0;
         canSpawn = true;
@@ -75,18 +84,18 @@ public class ArenaController : MonoBehaviour
 
     private void PlayerHealth_OnPlayerDeath(object sender, EventArgs e)
     {
-        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        for (int i = 0; i < spawnTransform.childCount; i++)
         {
-            if (transform.GetChild(0).GetChild(i).GetComponent<EnemyHealth>())
+            if (spawnTransform.GetChild(i).GetComponent<EnemyHealth>())
             {
-                transform.GetChild(0).GetChild(i).GetComponent<EnemyHealth>().Die();
+                spawnTransform.GetChild(i).GetComponent<EnemyHealth>().Die();
             }
         }
     }
 
     private void Action_performed(InputAction.CallbackContext obj)
     {
-        if (canSpawn)
+        if (canSpawn && !GameManager.GameOver)
         {
             HandleNextWave();
             canSpawn = false;
@@ -108,6 +117,7 @@ public class ArenaController : MonoBehaviour
     private void HandleNextWave()
     {
         waveNumber++;
+        playSound.Play(spawnSound);
         OnNextWave?.Invoke(this, new WaveEventArgs() { waveNumber = this.waveNumber });
 
         // increment all difficulty multiplyers
@@ -140,7 +150,7 @@ public class ArenaController : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Instantiate(enemies[Random.Range(0, enemies.Count)], RandomSpawnVector3(), transform.rotation, transform.GetChild(0));
+            Instantiate(enemies[Random.Range(0, enemies.Count)], RandomSpawnVector3(), transform.rotation, spawnTransform);
         }
     }
 
@@ -156,6 +166,8 @@ public class ArenaController : MonoBehaviour
         playerInputActions.Player.Action.performed -= Action_performed;
         SpawnFloorTiles.OnReady -= SpawnFloorTiles_OnReady;
         PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
+
+        playSound.DestroyAudio();
     }
 
     private void OnTriggerEnter(Collider other)

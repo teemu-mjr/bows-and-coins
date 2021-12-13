@@ -8,11 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // public fields
+    private static bool gameOver;
 
     // Private fields
     private PlayerInputActions playerInputActions;
     private Player player;
     private Options options;
+
+    public static bool GameOver { get { return gameOver; } }
 
     // Events
     public static event EventHandler OnGameStart;
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
 
         // creating the only OptionData instance
         options = new Options();
+
+        gameOver = false;
     }
 
     public void LoadScene(int sceneIndex)
@@ -57,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         playerInputActions.Player.Disable();
         player.SavePlayer();
+        gameOver = true;
     }
 
     private void OnDisable()

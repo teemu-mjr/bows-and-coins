@@ -31,26 +31,34 @@ public class Shop : MonoBehaviour
     public GameObject repeaterToggle;
     public GameObject tripleToggle;
 
-    // events
-    public static event EventHandler OnBuy;
-    public static event EventHandler OnDecline;
+    // audio
+    public AudioClip coin;
+    public AudioClip decline;
+
+    private PlaySound playSound;
+    private MusicController musicController;
 
 
     private void Awake()
     {
         PlayerHealth.OnPlayerDeath += PlayerDied;
         CloseShop();
+
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
+
+        musicController = GameObject.Find("Music").GetComponent<MusicController>();
     }
 
     public void BuyPlayerStat(string statName)
     {
         if (Player.stats.IncrementStat(statName))
         {
-            OnBuy?.Invoke(this, EventArgs.Empty);
+            playSound.Play(coin, true);
         }
         else
         {
-            OnDecline?.Invoke(this, EventArgs.Empty);
+            playSound.Play(decline, true);
         }
         UpdateText();
     }
@@ -125,6 +133,7 @@ public class Shop : MonoBehaviour
     private void PlayerDied(object sender, EventArgs e)
     {
         StartCoroutine(OpenWithDelay());
+        musicController.PlaySongWithFadeOut(1);
     }
 
     private IEnumerator OpenWithDelay()
@@ -163,5 +172,7 @@ public class Shop : MonoBehaviour
     {
         // Unsubscribes
         PlayerHealth.OnPlayerDeath -= PlayerDied;
+
+        playSound.DestroyAudio();
     }
 }

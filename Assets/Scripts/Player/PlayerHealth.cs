@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // public events
+    // public fields
     public GameObject deadPlayer;
 
     // private fields
@@ -16,6 +16,10 @@ public class PlayerHealth : MonoBehaviour
     // events
     public static event EventHandler<PlayerHealthArgs> OnPlayerDamage;
     public static event EventHandler OnPlayerDeath;
+
+    // audio
+    public AudioClip playerDamage;
+    private PlaySound playSound;
 
     // Propertyes
     public static bool IsAlive
@@ -29,15 +33,20 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         isAlive = true;
+
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
     }
 
     public void TakeDamage(float damage)
     {
         health -= Mathf.RoundToInt(damage);
+        playSound.Play(playerDamage, true);
         OnPlayerDamage?.Invoke(this, new PlayerHealthArgs() { health = this.health});
         if (health <= 0 && isAlive)
         {
             Die();
+            playSound.DestroyAudio();
         }
     }
 

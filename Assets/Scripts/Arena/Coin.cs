@@ -10,12 +10,19 @@ public class Coin : MonoBehaviour
     // private fields
     private Rigidbody rb;
 
+    // audio
+    public AudioClip coinPickUp;
+    private PlaySound playSound;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(RandomVector3(-2, 2), ForceMode.Impulse);
         rb.AddTorque(RandomVector3(-1000, 10000), ForceMode.Impulse);
+
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
     }
 
     private Vector3 RandomVector3(float maxValue, float minValue)
@@ -28,6 +35,8 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player.stats.AddCoins(coinValue);
+            playSound.Play(coinPickUp, true);
+            playSound.DestroyAudio();            
             Destroy(gameObject);
         }
         if (rb.isKinematic == false && other.CompareTag("Ground"))
@@ -38,5 +47,10 @@ public class Coin : MonoBehaviour
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
+    }
+
+    private void OnDestroy()
+    {
+        playSound.DestroyAudio();
     }
 }

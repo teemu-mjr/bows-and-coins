@@ -20,6 +20,12 @@ public class Bow : MonoBehaviour
     private bool startedToDraw;
     private bool isReady;
 
+    // audio
+    public AudioClip bowShoot;
+    public AudioClip bowDraw;
+    public AudioClip bowReady;
+    private PlaySound playSound;
+
     // events
     public static event EventHandler OnShoot;
     public static event EventHandler OnDraw;
@@ -28,6 +34,8 @@ public class Bow : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
     }
 
     private void Update()
@@ -68,15 +76,17 @@ public class Bow : MonoBehaviour
             Shoot();
         }
 
-        if(heldBackProcentage >= 0.4f && !startedToDraw)
+        if (heldBackProcentage >= 0.4f && !startedToDraw)
         {
             OnDraw?.Invoke(this, EventArgs.Empty);
+            playSound.Play(bowDraw, true);
             startedToDraw = true;
         }
 
         if (heldBackProcentage >= 1 && !isReady)
         {
             OnReady?.Invoke(this, EventArgs.Empty);
+            playSound.Play(bowReady, true);
             isReady = true;
         }
         else if (heldBackProcentage < 1)
@@ -103,6 +113,7 @@ public class Bow : MonoBehaviour
             Instantiate(arrow, (transform.position + transform.forward - transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, -10, 0)));
             Instantiate(arrow, (transform.position + transform.forward + transform.right * 0.8f + shootOffset), transform.rotation * Quaternion.Euler(new Vector3(0, 10, 0)));
         }
+        playSound.Play(bowShoot, true);
         OnShoot?.Invoke(this, EventArgs.Empty);
         heldBackTime = 0;
         heldBackProcentage = 0;

@@ -15,9 +15,12 @@ public class EnemyHealth : MonoBehaviour
     private float health;
     private int dropAmount;
     private Transform coinTransform;
+    private bool isDead;
+
+    public AudioClip damageSound;
+    private PlaySound playSound;
 
     // events
-    public static event EventHandler OnDeath;
     public event EventHandler OnDamage;
 
     private void Start()
@@ -30,26 +33,28 @@ public class EnemyHealth : MonoBehaviour
         dropAmount = Mathf.RoundToInt(ArenaController.coinDropAmount.Value);
         coin.GetComponent<Coin>().coinValue = Mathf.RoundToInt(ArenaController.coinValue.Value);
         coinTransform = GameObject.Find("Coins").transform;
+
+        playSound = GetComponent<PlaySound>();
+        playSound = playSound.Init();
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
         heathBar.GetComponent<HeathBar>().UpdateBar(health / ArenaController.enemyHealth.Value);
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
+            isDead = true;
             Die();
         }
-        else
-        {
-            OnDamage?.Invoke(this, EventArgs.Empty);
-        }
+        OnDamage?.Invoke(this, EventArgs.Empty);
     }
 
     public void Die()
     {
         DropItem();
-        OnDeath?.Invoke(this, EventArgs.Empty);
+        playSound.Play(damageSound, true);
+        playSound.DestroyAudio();
         Destroy(gameObject);
     }
 

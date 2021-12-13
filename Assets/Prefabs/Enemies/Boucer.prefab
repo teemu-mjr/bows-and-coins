@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7331532257715301693}
   - component: {fileID: -5467292382110365546}
   - component: {fileID: 1657755328894022860}
+  - component: {fileID: 4912148313721016555}
   m_Layer: 7
   m_Name: Boucer
   m_TagString: Enemy
@@ -86,6 +87,7 @@ MonoBehaviour:
   arrow: {fileID: 6754017770230305004, guid: 067f2db428b681242baf46ed4f0aab20, type: 3}
   rotatingShell: {fileID: 6857752843667224830}
   firePoint: {fileID: 1016718716752806681}
+  bowShoot: {fileID: 8300000, guid: 0d8e79a603825ca4cbc6823f02df5e18, type: 3}
 --- !u!114 &1657755328894022860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +104,19 @@ MonoBehaviour:
   body: {fileID: 5850170128134428968, guid: 682f0854789fa3c46baa63f46ab957aa, type: 3}
   heathBar: {fileID: 3331267101077544303}
   bodyTransformObject: {fileID: 6857752843667224830}
+  damageSound: {fileID: 8300000, guid: a50e7158832e0964291d2c57d2596f54, type: 3}
+--- !u!114 &4912148313721016555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10378325430075552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed376c1f10f30647985a82b8f686151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &7453972857085690535
 Animator:
   serializedVersion: 3
